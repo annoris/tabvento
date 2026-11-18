@@ -1,0 +1,53 @@
+Tabvento Official License & Solana Activation Terms
+
+Copyright (c) 2026 Tabvento (https://github.com/annoris/AI-tabvento)
+
+================================================================================
+PART I — TABVENTO PLATFORM & SOLANA WEB3 ACTIVATION TERMS
+================================================================================
+
+1. Simulated Demo Mode (Free Evaluation):
+   Anyone downloading Tabvento from GitHub may run and explore the local
+   dashboard in Simulated Demo Mode (`mode: "demo"`) at `http://127.0.0.1:8765`
+   free of charge, without API keys or prior payment.
+
+2. Live Browser Mode (`mode: "live"`) Activation via Solana:
+   Official activation of Live Browser Mode in the Tabvento dashboard requires
+   an on-chain verified contribution on Solana Mainnet to the project's
+   official wallet:
+   - Official Solana Wallet: 3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm
+   - Minimum Contribution: $88 USD (in native SOL or SPL USDC)
+   - Maximum Limit: No maximum limit (any contribution >= $88 USD is valid)
+
+3. GitHub Compliance, Security & Attribution:
+   - Always retain this `LICENSE` and `THIRD_PARTY_NOTICES.md` in all copies
+     or distributions.
+   - Never commit or publish `.env` files, AI provider keys, cookies, SQLite
+     databases, or private mission history to GitHub repositories.
+   - External AI model usage is billed directly by the user's chosen provider
+     using their own keys in `.env` (or free locally via Ollama).
+   - Bypassing, spoofing, or redistributing unauthorized activation records
+     for Tabvento Live Browser Mode is prohibited.
+
+================================================================================
+PART II — MIT LICENSE GRANT & WARRANTY DISCLAIMER
+================================================================================
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice, the Tabvento Platform & Solana Web3 Activation
+Terms, and this permission notice shall be included in all copies or
+substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
