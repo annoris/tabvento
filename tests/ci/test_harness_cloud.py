@@ -16,6 +16,7 @@ import urllib.request
 from pathlib import Path
 
 import pytest
+from conftest import python_executable
 
 ROOT = Path(__file__).resolve().parents[2]
 PROCESS_ENV = ('BU_NAME', 'BH_OPEN_LIVE_URL', 'BH_TAB_MARKER', 'BH_CLIENT', 'BH_CLIENT_VERSION', 'BH_DEVICE_NAME')
@@ -782,7 +783,7 @@ async def test_cli_mcp_with_no_browser_installed_installs_chromium_without_touch
 
 	uvx = tmp_path / 'uvx'
 	uvx.write_text(
-		f'#!{sys.executable}\nimport sys\nprint("Downloading Chromium")\nopen(sys.argv[0] + ".args", "w").write(" ".join(sys.argv[1:]))\n'
+		python_executable('import sys\nprint("Downloading Chromium")\nopen(sys.argv[0] + ".args", "w").write(" ".join(sys.argv[1:]))\n')
 	)
 	uvx.chmod(0o755)
 	monkeypatch.setenv('PATH', str(tmp_path))  # this uvx only: never the machine's apt-get, even as root

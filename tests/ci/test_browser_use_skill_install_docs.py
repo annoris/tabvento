@@ -5,6 +5,7 @@ import sys
 from pathlib import Path
 
 import pytest
+from conftest import python_executable
 
 ROOT = Path(__file__).resolve().parents[2]
 UPSTREAM_README = ROOT / 'docs' / 'upstream-browser-use.md'
@@ -28,7 +29,7 @@ def _fake_command(bin_dir: Path, name: str, code: str) -> None:
 		(bin_dir / f'{name}.cmd').write_text(f'@"{sys.executable}" "{script}" %*\r\n', encoding='utf-8')
 	else:
 		exe = bin_dir / name
-		exe.write_text(f'#!{sys.executable}\n{code}', encoding='utf-8')
+		exe.write_text(python_executable(code), encoding='utf-8')
 		exe.chmod(0o755)
 
 

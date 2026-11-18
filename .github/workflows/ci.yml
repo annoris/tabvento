@@ -32,7 +32,10 @@ jobs:
         with:
           enable-cache: true
       - run: uv sync --locked --dev --all-extras --python ${{ matrix.python }}
-      - run: uv run --no-sync pytest tests -m "not chrome"
+      - run: uv run --no-sync pytest tests -m "not chrome" --junitxml=python-results.xml
+      - name: Report Python test failures
+        if: always()
+        run: uv run --no-sync python scripts/ci_test_summary.py python-results.xml
       - run: uv run --no-sync ruff check --no-fix
       - run: uv run --no-sync pyright
       - run: uv build
@@ -59,4 +62,7 @@ jobs:
       - run: uv sync --locked --dev --all-extras --python 3.11
       - run: |
           CHROME="$(command -v google-chrome)" || { echo "google-chrome not found on PATH" >&2; exit 1; }
-          CHROME="$CHROME" uv run --no-sync pytest tests -m chrome -rs
+          CHROME="$CHROME" uv run --no-sync pytest tests -m chrome -rs --junitxml=chrome-results.xml
+      - name: Report Chrome test failures
+        if: always()
+        run: uv run --no-sync python scripts/ci_test_summary.py chrome-results.xml

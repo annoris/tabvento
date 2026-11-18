@@ -12,7 +12,7 @@ import time
 from pathlib import Path
 
 import pytest
-from conftest import script
+from conftest import python_executable, script
 
 from browser_use import Agent, Browser
 from browser_use.browser import browser as browser_mod
@@ -30,8 +30,7 @@ def fake_chrome(tmp_path):
 	def make(mode: str) -> str:
 		path = tmp_path / f'fake-chrome-{mode}'
 		path.write_text(
-			f"""#!{sys.executable}
-import os, pathlib, sys, time
+			python_executable(f"""import os, pathlib, sys, time
 args = sys.argv[1:]
 out = pathlib.Path({str(tmp_path)!r})
 (out / 'argv').write_text('\\n'.join(args)); (out / 'pid').write_text(str(os.getpid()))
@@ -46,7 +45,7 @@ if mode == 'slow':
 if mode != 'hang':
 	(udd / 'DevToolsActivePort').write_text('4321\\n/devtools/browser/fake\\n')
 time.sleep(600)
-"""
+""")
 		)
 		path.chmod(0o755)
 		return str(path)

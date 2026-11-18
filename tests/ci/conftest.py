@@ -2,6 +2,7 @@
 
 import json
 import os
+import shlex
 import shutil
 import socket
 import subprocess
@@ -33,6 +34,11 @@ os.environ['BH_CONFIG_DIR'] = str(Path(tempfile.gettempdir()) / 'browser-use-tes
 import browser_use.telemetry.service as _telemetry_service  # noqa: E402
 
 _telemetry_service.POSTHOG_HOST = 'http://127.0.0.1:9'  # nothing listens on port 9
+
+
+def python_executable(code: str) -> str:
+	"""A POSIX shell/Python trampoline supporting interpreter paths containing spaces."""
+	return '#!/bin/sh\n' + "'''exec' " + shlex.quote(sys.executable) + ' "$0" "$@"\n' + "' '''\n" + code
 
 
 def find_chrome() -> str | None:
