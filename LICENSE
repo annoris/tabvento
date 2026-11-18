@@ -1,53 +1,112 @@
-Tabvento Official License & Solana Activation Terms
+Tabvento Source-Available Commercial License
+Identifier: LicenseRef-Tabvento
+Version: 1.0 (2026-11-18)
 
 Copyright (c) 2026 Tabvento (https://github.com/annoris/AI-tabvento)
 
-================================================================================
-PART I — TABVENTO PLATFORM & SOLANA WEB3 ACTIVATION TERMS
-================================================================================
+Licensor: Annoris Fernandez, operating the Tabvento project, Florida, USA.
+"Tabvento" in these terms refers to that project and its licensor, not to a
+separately identified corporation.
 
-1. Simulated Demo Mode (Free Evaluation):
-   Anyone downloading Tabvento from GitHub may run and explore the local
-   dashboard in Simulated Demo Mode (`mode: "demo"`) at `http://127.0.0.1:8765`
-   free of charge, without API keys or prior payment.
+1. Scope and preserved rights
 
-2. Live Browser Mode (`mode: "live"`) Activation via Solana:
-   Official activation of Live Browser Mode in the Tabvento dashboard requires
-   an on-chain verified contribution on Solana Mainnet to the project's
-   official wallet:
-   - Official Solana Wallet: 3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm
-   - Minimum Contribution: $88 USD (in native SOL or SPL USDC)
-   - Maximum Limit: No maximum limit (any contribution >= $88 USD is valid)
+This license applies only to new copyrightable contributions owned by Tabvento
+that are first published with this license (the "Covered Contributions"). It
+does not claim ownership of third-party material or withdraw rights already
+granted under an earlier license. Previously distributed versions and material
+already made available under MIT remain usable under those prior grants. The
+presence of this file in a later checkout does not replace those grants.
 
-3. GitHub Compliance, Security & Attribution:
-   - Always retain this `LICENSE` and `THIRD_PARTY_NOTICES.md` in all copies
-     or distributions.
-   - Never commit or publish `.env` files, AI provider keys, cookies, SQLite
-     databases, or private mission history to GitHub repositories.
-   - External AI model usage is billed directly by the user's chosen provider
-     using their own keys in `.env` (or free locally via Ollama).
-   - Bypassing, spoofing, or redistributing unauthorized activation records
-     for Tabvento Live Browser Mode is prohibited.
+The preexisting Browser Use engine, third-party dependencies, and bundled fonts
+remain governed by their respective licenses, including MIT and SIL OFL 1.1.
+See THIRD_PARTY_NOTICES.md and the applicable license files. You may exercise
+those independent permissions, including modification and redistribution,
+without paying Tabvento. This license imposes no activation requirement on
+independent use of that third-party material.
 
-================================================================================
-PART II — MIT LICENSE GRANT & WARRANTY DISCLAIMER
-================================================================================
+2. Free access and Simulated Demo Mode
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+You may view, download, copy, study, and modify the Covered Contributions for
+Simulated Demo Mode and evaluation, and run Simulated Demo Mode free of charge.
+Demo Mode requires no external account, provider key, or payment. You may
+redistribute the Covered Contributions for these permitted purposes if you
+retain this license, the applicable copyright notices, and third-party notices,
+and clearly identify your modifications. Recipients receive the same permissions
+under this license directly from Tabvento.
 
-The above copyright notice, the Tabvento Platform & Solana Web3 Activation
-Terms, and this permission notice shall be included in all copies or
-substantial portions of the Software.
+Public viewing and forking through GitHub are permitted in accordance with
+GitHub's applicable terms. Merely viewing, downloading, or forking this project
+does not create an obligation to pay. These permissions do not make this an
+OSI-approved open-source license.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+3. Official Live Browser Mode activation
+
+For Covered Contributions, use of Tabvento's official Live Browser Mode requires
+a verified activation. Official activation requires a confirmed qualifying
+payment on Solana Mainnet, in native SOL or SPL USDC, to:
+
+3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm
+
+The minimum qualifying value is $88 USD. There is no maximum contribution limit;
+a qualifying contribution equal to or greater than $88 USD is valid. Valuation
+and verification follow the published verifier for the version being activated.
+Amounts above the minimum do not create additional rights, services, or benefits
+unless separately agreed. Provider charges and network transaction fees are
+separate from Tabvento activation.
+
+Following successful verification, you may use the Covered Contributions in
+Live Browser Mode through that activation. A previously promised permanent
+unlock for the activated local data directory remains permanent; these terms
+add no subscription, renewal fee, or retroactive payment requirement. This does
+not promise perpetual support, future releases, or third-party service access.
+
+For Covered Contributions only, this license does not grant permission to
+bypass or falsify official activation, distribute forged activation records, or
+redistribute the Covered Contributions as an activated Live product without
+separate permission.
+This limitation does not restrict prior license grants, independent third-party
+rights, or acts permitted by applicable law. Additional commercial distribution
+or other permissions require a separate agreement with the relevant holder.
+
+4. Payment and contract formation
+
+The payment requirement is for official Live activation, not for access to the
+public repository. A payment required for activation is a commercial payment;
+calling it a "contribution" does not make it a tax-deductible donation. No such
+tax status is represented.
+
+This file does not assert that downloading or forking constitutes acceptance
+of a payment contract. Any separate purchase agreement requires legally
+sufficient notice and assent. On-chain verification alone does not establish
+who accepted contractual terms. Nothing here creates a debt for someone who
+merely accesses the source or elects not to activate Live Mode.
+
+5. Third-party services and lawful use
+
+Activation does not include model-provider accounts, API credits, cloud browser
+services, or permission to access another person's systems. Users supply their
+own authorized connections and remain subject to the applicable service terms
+and law. No third-party license or trademark rights are expanded by this file.
+
+6. Warranty, liability, and mandatory rights
+
+TO THE EXTENT PERMITTED BY APPLICABLE LAW, THE COVERED CONTRIBUTIONS ARE
+PROVIDED "AS IS", WITHOUT WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+PARTICULAR PURPOSE, OR NONINFRINGEMENT. TO THE SAME EXTENT, TABVENTO IS NOT
+LIABLE FOR DAMAGES ARISING FROM THEIR USE OR INABILITY TO USE THEM.
+
+Nothing in this license excludes a right, remedy, warranty, or liability that
+applicable law does not permit to be excluded, or excuses fraud or deceptive
+practices. Separate enforceable written commitments remain applicable.
+
+7. Governing law and future changes
+
+Florida law and applicable United States federal law govern these terms,
+subject to mandatory laws and rights that cannot be displaced by agreement.
+This provision imposes no arbitration requirement, exclusive forum, or waiver
+of legal remedies.
+
+Future license revisions apply prospectively to contributions first released
+under them. They do not impose retroactive fees, cancel previously granted
+permissions, or remove previously promised permanent local activations. Rights
+not granted in Covered Contributions are reserved to their respective holders.

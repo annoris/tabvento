@@ -7,18 +7,26 @@
 To unlock **Live Browser Mode (`mode: "live"`)**, Tabvento uses on-chain verification on **Solana Mainnet**:
 
 - **Official Solana Wallet:** `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm`
-- **Minimum Contribution:** **$88 USD** (in native SOL or SPL USDC on Solana Mainnet)
-- **Maximum Limit:** **No maximum limit** (any contribution equal to or greater than `$88 USD` is valid)
+- **Minimum Activation Payment:** **$88 USD** (in native SOL or SPL USDC on Solana Mainnet)
+- **Maximum Limit:** **No maximum limit** (any payment equal to or greater than `$88 USD` is valid; amounts above the minimum are optional support)
 - **Local Activation:** Paste the Base58 `Transaction Signature` in the **Connections** tab (`POST /api/contribution/verify`). Tabvento verifies on-chain receipt at `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm` and stores the unlocked status in local SQLite.
+
+The $88 USD minimum is a required payment for official Live Browser Mode activation, rather than a voluntary donation. Any amount above $88 USD is optional project support. The existing interface and API retain the label “contribution” for compatibility. Payment verification does not by itself record acceptance of a versioned license agreement.
+
+## Licensing Scope
+
+Newly offered Tabvento-owned material is source-available under the custom commercial [LICENSE](../LICENSE). This is not a declaration that the entire distribution is MIT-licensed or OSI-approved open source. Upstream engine code and dependencies retain their independent licenses; see [third-party notices](../THIRD_PARTY_NOTICES.md) and [upstream provenance](upstream-browser-use.md).
+
+This transition applies prospectively. Previously granted rights remain subject to their original terms. Existing permanent local activations are preserved, and no renewal charge is introduced. Free Simulated Demo evaluation does not require payment; independent MIT rights do not depend on purchasing Tabvento activation.
 
 ## Activation Summary
 
 | Tier / Parameter | Specification |
 |---|---|
 | **Simulated Demo Mode** | Free (`mode: "demo"`) |
-| **Live Browser Mode** | Unlocked via verified Solana contribution (`mode: "live"`) |
+| **Live Browser Mode** | Unlocked via verified Solana activation payment (`mode: "live"`) |
 | **Official Solana Wallet** | `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm` |
-| **Minimum Contribution** | **$88 USD** in SOL or USDC (**no maximum limit**) |
+| **Minimum Activation Payment** | **$88 USD** in SOL or USDC (**no maximum limit**) |
 | **AI Model Usage** | Billed separately by the user's chosen provider via their own `.env` key, or free locally via Ollama |
 | **Privacy & Security** | No API keys, mission tasks, or browsing history are sent to a licensing server |
 

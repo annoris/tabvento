@@ -295,6 +295,29 @@ document.querySelectorAll('[data-prompt]').forEach((button) =>
 		focusComposer();
 	}),
 );
+function renderExamples() {
+	const grid = $('#example-grid');
+	grid.replaceChildren();
+	for (let number = 1; number <= 24; number++) {
+		const key = 'examples.' + String(number).padStart(2, '0');
+		const button = document.createElement('button');
+		button.type = 'button';
+		button.className = 'example-card';
+		button.dataset.example = String(number);
+		const title = document.createElement('strong');
+		title.textContent = String(number).padStart(2, '0') + ' / ' + tr(key + '.title');
+		const prompt = document.createElement('span');
+		prompt.textContent = tr(key + '.prompt');
+		const mode = document.createElement('small');
+		mode.textContent = tr(number <= 6 ? 'examples.demo' : 'examples.live');
+		button.append(mode, title, prompt);
+		button.addEventListener('click', () => {
+			$('#task-input').value = tr(key + '.prompt');
+			focusComposer();
+		});
+		grid.append(button);
+	}
+}
 function updateMode() {
 	const live = $('#mode-select').value === 'live';
 	$('#mode-hint').setAttribute(
@@ -1052,6 +1075,7 @@ function setLanguage(lang) {
 	state.lang = next;
 	langPreference(next);
 	document.documentElement.lang = next;
+	renderExamples();
 	if (window.TABVENTO_I18N?.applyDom) {
 		window.TABVENTO_I18N.applyDom(document, next);
 		replaceIcons();

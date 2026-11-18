@@ -10,7 +10,7 @@ Tabvento turns a browser task into a structured workspace you can follow: descri
 
 **Copyright © 2026 Tabvento · Local-first AI Browser Mission Desk**
 
-[Quick Start](docs/QUICKSTART.md) · [Full Guide](docs/tabvento.md) · [Official License](LICENSE) · [Contribute](.github/CONTRIBUTING.md) · [Security](.github/SECURITY.md)
+[Quick Start](docs/QUICKSTART.md) · [24 Mission Examples](docs/EXAMPLES.md) · [Full Guide](docs/tabvento.md) · [Official License](LICENSE) · [Contribute](.github/CONTRIBUTING.md) · [Security](.github/SECURITY.md)
 
 ---
 
@@ -36,10 +36,10 @@ Open **http://127.0.0.1:8765** in your browser and click **Start demo** (or sele
 **Simulated Demo Mode (`mode: "demo"`) is completely free.** To unlock **Live Browser Mode (`mode: "live"`)** with a real local Chromium browser and your configured AI provider:
 
 - **Official Solana Wallet:** `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm`
-- **Minimum Contribution:** **$88 USD** (in native **SOL** or **USDC** on Solana Mainnet)
-- **Maximum Limit:** **No maximum limit** (any contribution equal to or greater than `$88 USD` is valid)
+- **Minimum Activation Payment:** **$88 USD** (in native **SOL** or **USDC** on Solana Mainnet)
+- **Maximum Limit:** **No maximum limit** (any payment equal to or greater than `$88 USD` is valid; amounts above the minimum are optional support)
 - **On-Chain Verification:**
-  1. Send your contribution (`>= $88 USD`, no maximum limit) on Solana Mainnet to `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm` (or use the **Open in Solana Pay ↗** button in the dashboard).
+  1. Send your activation payment (`>= $88 USD`, no maximum limit) on Solana Mainnet to `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm` (or use the **Open in Solana Pay ↗** button in the dashboard).
   2. Open the **Connections** tab at `http://127.0.0.1:8765#conexiones`.
   3. Paste your Base58 **Solana Transaction Signature** and click **Verify Solana contribution**.
   4. Tabvento verifies the confirmed transaction on-chain and saves your unlocked activation in local SQLite.
@@ -107,10 +107,12 @@ All tests use mocked models and simulated RPC responses without calling paid AI 
 
 ---
 
-## 7. Official License & GitHub Compliance
+## 7. Licensing
 
-**Copyright © 2026 Tabvento.** Distributed under the terms in [LICENSE](LICENSE).
+**Copyright © 2026 Tabvento.** Newly offered Tabvento-owned code is source-available under the custom commercial terms in [LICENSE](LICENSE), not the MIT license. Downloading and evaluating Simulated Demo Mode is free. Official Live Browser Mode activation requires a minimum payment of **$88 USD**; additional support is optional, with no maximum payment.
 
 - **Simulated Demo Mode:** Free for local evaluation.
-- **Live Browser Mode:** Unlocked via verified Solana contribution (minimum **$88 USD** in SOL or USDC, no maximum limit) to `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm`.
-- See [LICENSE](LICENSE), [commercial plan](docs/commercial-plan.md), and [third-party notices](THIRD_PARTY_NOTICES.md) for complete details.
+- **Live Browser Mode:** Unlocked via verified Solana activation payment (minimum **$88 USD** in SOL or USDC, no maximum limit) to `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm`.
+- Previously granted licenses and existing permanent local activations remain governed by their original terms; this transition does not impose retroactive fees or renewal charges.
+- Upstream engine code and other third-party components retain their own licenses, including MIT and SIL OFL. See [third-party notices](THIRD_PARTY_NOTICES.md) and [upstream provenance](docs/upstream-browser-use.md).
+- The [commercial terms](LICENSE) apply to Tabvento-owned material only. A payment condition does not remove independent rights in MIT-licensed code. See the [commercial plan](docs/commercial-plan.md) for the activation scope.

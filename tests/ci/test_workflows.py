@@ -51,7 +51,12 @@ def test_project_metadata_names_tabvento_and_preserves_licenses():
 
 	project = tomllib.loads((ROOT / 'pyproject.toml').read_text())['project']
 	assert project['name'] == 'tabvento'
-	assert project['license'] == 'MIT'
+	assert project['license'] == 'LicenseRef-Tabvento AND MIT AND OFL-1.1'
+	assert 'License :: OSI Approved :: MIT License' not in project['classifiers']
+	assert 'THIRD_PARTY_NOTICES.md' in project['license-files']
 	assert not project.get('urls')
 	assert 'Copyright (c) 2026 Tabvento' in (ROOT / 'LICENSE').read_text()
-	assert (ROOT / 'THIRD_PARTY_NOTICES.md').is_file()
+	notices = (ROOT / 'THIRD_PARTY_NOTICES.md').read_text()
+	assert 'Copyright (c) 2024 Gregor Zunic' in notices
+	assert 'MIT License' in notices
+	assert 'SIL Open Font License' in notices

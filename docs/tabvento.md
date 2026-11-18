@@ -21,7 +21,7 @@ Missions and settings are stored in a local SQLite database (`missions.sqlite3`)
 
 - **Simulated Demo (`mode: "demo"` — Free):** Lets you explore the interface with a simulated sequence—no API keys, automation browser, or payment required. Results are clearly labeled `SIMULATED DEMO`.
 - **Live Browser (`mode: "live"` — Solana Activated):** Launches a local Chromium browser controlled by your configured AI model. Requires:
-  1. A verified Solana contribution of **at least $88 USD (no maximum limit)** in SOL or USDC to `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm`.
+  1. A verified Solana activation payment of **at least $88 USD (no maximum limit)** in SOL or USDC to `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm`.
   2. An explicit model provider connection saved in **Connections** with its API key configured in `.env` (or Local Ollama).
   3. Chrome, Chromium, or Edge installed locally (`uv run python -m browser_use install` installs Chromium if needed).
 
@@ -30,10 +30,12 @@ Missions and settings are stored in a local SQLite database (`missions.sqlite3`)
 In **Connections**, the **03 / SOLANA · UNLOCK LIVE MODE** card displays:
 
 - **Official Solana Wallet:** `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm`
-- **Minimum Contribution:** `$88 USD` in SOL or USDC (**no maximum limit**)
+- **Minimum Activation Payment:** `$88 USD` in SOL or USDC (**no maximum limit**)
 - **Device Reference Code:** `TV-...` (optional Memo for Solana Pay)
 
-After sending your contribution on Solana Mainnet, paste the Base58 transaction signature and click **Verify Solana contribution**. Once verified, Live Browser Mode is permanently unlocked for your local data directory.
+After sending your activation payment on Solana Mainnet, paste the Base58 transaction signature and click **Verify Solana contribution**. Once verified, Live Browser Mode is permanently unlocked for your local data directory.
+
+The $88 USD minimum is the payment for official Live activation; amounts above it are optional support, with no maximum. No renewal fee is introduced. The interface and API retain their existing “contribution” labels. Newly offered Tabvento-owned material uses the custom commercial [license](../LICENSE), while upstream MIT code, other third-party licenses, previously granted rights, and existing permanent local activations remain preserved. See the [licensing scope](commercial-plan.md#licensing-scope).
 
 ## 4. Model Connections
 

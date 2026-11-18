@@ -358,3 +358,60 @@ test('Solana contribution card displays official wallet, $88 minimum with no max
 	await tick();
 	assert.match($('#solana-verify-status').textContent, /Verified on Solana \(88 USD · SOL\)/);
 });
+
+test('24 bilingual examples fill drafts without running or changing mode or provider', async (t) => {
+	const { w, pending, initialize, $ } = setup(t);
+	await initialize({ provider: 'openai', model: 'my-exact-model', base_url: '' });
+	$('#example-library').open = true;
+	$('#mode-select').value = 'live';
+	const provider = $('#provider-select').value;
+	const model = $('#model-input').value;
+	const requestCount = pending.length;
+	const englishPrompts = [];
+	for (const lang of ['en', 'es']) {
+		assert.equal(w.document.documentElement.lang, lang);
+		const cards = [...w.document.querySelectorAll('[data-example]')];
+		assert.equal(cards.length, 24);
+		assert.equal(new Set(cards.map((card) => card.querySelector('span').textContent)).size, 24);
+		for (const [i, card] of cards.entries()) {
+			assert.equal(card.type, 'button');
+			const prompt = card.querySelector('span').textContent;
+			assert.ok(prompt.length >= 3 && prompt.length <= 4000);
+			assert.ok(!card.textContent.includes('examples.'));
+			if (lang === 'en') englishPrompts.push(prompt);
+			else assert.notEqual(prompt, englishPrompts[i]);
+			card.click();
+			await new Promise((resolve) => w.requestAnimationFrame(resolve));
+			assert.equal($('#task-input').value, prompt);
+			assert.equal(w.document.activeElement, $('#task-input'));
+			assert.equal($('#mode-select').value, 'live');
+			assert.equal($('#provider-select').value, provider);
+			assert.equal($('#model-input').value, model);
+			assert.equal(pending.length, requestCount, 'example selection must not send requests');
+		}
+		if (lang === 'en') {
+			$('#task-input').value = 'My edited draft';
+			$('#lang-toggle').click();
+			assert.equal($('#task-input').value, 'My edited draft');
+			assert.equal($('#example-library').open, true);
+		}
+	}
+	$('#mode-select').value = 'demo';
+	$('[data-example="24"]').click();
+	assert.equal($('#mode-select').value, 'demo', 'a Live idea must not switch Demo to Live');
+	assert.equal(pending.length, requestCount);
+});
+
+test('example library explains simulated output and Live prerequisites in both languages', async (t) => {
+	const { w, initialize, $ } = setup(t);
+	await initialize();
+	assert.match($('#example-library summary').textContent, /24/);
+	assert.match($('.example-mode-note').textContent, /four generic simulated steps.*no browsing or AI/);
+	assert.match($('.example-mode-note').textContent, /\$88.*configured provider.*local browser/);
+	assert.equal(w.document.querySelectorAll('.example-card small').length, 24);
+	assert.equal([...w.document.querySelectorAll('.example-card small')].filter((el) => el.textContent === 'Demo exercise').length, 6);
+	$('#lang-toggle').click();
+	assert.match($('.example-mode-note').textContent, /cuatro pasos genéricos simulados.*sin navegar ni IA/);
+	assert.match($('.example-mode-note').textContent, /\$88.*proveedor configurado.*navegador local/);
+	assert.equal([...w.document.querySelectorAll('.example-card small')].filter((el) => el.textContent === 'Ejercicio Demo').length, 6);
+});

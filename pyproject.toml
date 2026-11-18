@@ -4,7 +4,7 @@ description = "Tabvento: local mission dashboard for AI browser automation"
 authors = [{ name = "Tabvento contributors" }]
 version = "0.1.0"
 readme = "README.md"
-license = "MIT"
+license = "LicenseRef-Tabvento AND MIT AND OFL-1.1"
 license-files = ["LICENSE", "THIRD_PARTY_NOTICES.md", "tabvento/web/fonts/*-OFL.txt"]
 requires-python = ">=3.11,<4.0"
 classifiers = [
@@ -13,7 +13,6 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: 3.14",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
 dependencies = [

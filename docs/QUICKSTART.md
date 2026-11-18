@@ -1,6 +1,6 @@
 # Tabvento Quick Start
 
-Explore a simulated mission first, then verify your Solana contribution and connect an AI model when you are ready for live browser automation.
+Explore a simulated mission first, then verify your Solana activation payment and connect an AI model when you are ready for live browser automation.
 
 ## 1. Start Locally
 
@@ -28,11 +28,13 @@ No API key, browser installation, or Solana transaction is required for Simulate
 
 ## 3. Unlock and Run Live Browser Missions
 
-### Step 1: Verify Your Solana Contribution (Minimum $88 USD, No Maximum Limit)
+### Step 1: Verify Your Activation Payment (Minimum $88 USD, No Maximum Limit)
 
-1. Send a contribution of **at least $88 USD** (in SOL or USDC, with **no maximum limit**) on Solana Mainnet to the official Tabvento wallet:
+1. Send an activation payment of **at least $88 USD** (in SOL or USDC, with **no maximum limit**) on Solana Mainnet to the official Tabvento wallet:
    `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm`
 2. Open **Connections** (`http://127.0.0.1:8765#conexiones`), paste your Base58 **Solana Transaction Signature**, and click **Verify Solana contribution**.
+
+The minimum is the payment for official Live activation. Any additional amount is optional support, with no maximum. The verification button still uses the existing “contribution” label. Read the [license](../LICENSE) and [licensing scope](commercial-plan.md#licensing-scope); third-party licenses and previously granted rights are preserved.
 
 ### Step 2: Install a Local Browser
 

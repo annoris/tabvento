@@ -2093,3 +2093,67 @@ body.motion-paused *:before {
 		gap: 8px;
 	}
 }
+
+/* Mission examples remain drafts until the user submits the composer. */
+.example-library {
+	margin-top: 18px;
+	border: 1px solid var(--border);
+	border-radius: 12px;
+	background: var(--panel);
+	padding: 18px;
+}
+.example-library summary {
+	cursor: pointer;
+	font-family: var(--display);
+	font-weight: 600;
+	color: var(--lime);
+}
+.example-library summary:focus-visible {
+	outline: 2px solid var(--lime);
+	outline-offset: 5px;
+}
+.example-library > p {
+	color: var(--muted);
+	font-size: 13px;
+	line-height: 1.6;
+	margin: 14px 0;
+}
+.example-library .example-mode-note {
+	border-left: 2px solid var(--lime);
+	padding-left: 12px;
+}
+.example-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr));
+	gap: 10px;
+}
+.example-card {
+	display: flex;
+	flex-direction: column;
+	gap: 9px;
+	text-align: left;
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	padding: 16px;
+	background: var(--raised);
+	color: var(--text);
+	cursor: pointer;
+}
+.example-card:hover {
+	border-color: var(--lime);
+}
+.example-card strong {
+	font-size: 14px;
+	font-family: var(--display);
+}
+.example-card > span {
+	color: var(--muted);
+	font-size: 12px;
+	line-height: 1.6;
+	overflow-wrap: anywhere;
+}
+
+.example-card > small {
+	color: var(--lime);
+	font-size: 11px;
+}
