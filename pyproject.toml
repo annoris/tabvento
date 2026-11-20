@@ -148,7 +148,7 @@ exclude-newer = "2026-11-09T09:48:30Z"
 
 [dependency-groups]
 dev = [
-    "ruff==0.14.14",
+    "ruff==0.17.5",
     "build==1.4.0",
     "pytest==9.0.2",
     "pytest-asyncio==1.3.0",
