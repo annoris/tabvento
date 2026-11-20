@@ -164,12 +164,12 @@ RUN --mount=type=cache,target=/root/.cache,sharing=locked,id=cache-$TARGETARCH$T
 # Copy the rest of the browser-use codebase
 COPY . /app
 
-# Install the browser-use package and all of its optional dependencies
+# Install the Tabvento package and all of its optional dependencies
 RUN --mount=type=cache,target=/root/.cache,sharing=locked,id=cache-$TARGETARCH$TARGETVARIANT \
-     echo "[+] Installing browser-use pip library from source..." \
+     echo "[+] Installing Tabvento package from source..." \
      && ( \
         uv sync --all-extras --locked --no-dev \
-        && python -c "import browser_use; print('browser-use installed successfully')" \
+        && python -c "import browser_use, tabvento; print('tabvento installed successfully')" \
         && echo -e '\n\n' \
      ) | tee -a /VERSION.txt
 
@@ -181,13 +181,14 @@ RUN mkdir -p "$DATA_DIR/profiles/default" \
         && echo -e "BUILD_END_TIME=$(date +"%Y-%m-%d %H:%M:%S %s")\n\n" \
     ) | tee -a /VERSION.txt
 
+ENV TABVENTO_DATA_DIR=/data
 
 USER "$BROWSERUSE_USER"
 VOLUME "$DATA_DIR"
-EXPOSE 9242
+EXPOSE 8765
 EXPOSE 9222
 
 # HEALTHCHECK --interval=30s --timeout=20s --retries=15 \
-#     CMD curl --silent 'http://localhost:8000/health/' | grep -q 'OK'
+#     CMD curl --silent 'http://127.0.0.1:8765/api/status' | grep -q 'demo_available'
 
-ENTRYPOINT ["browser-use"]
+ENTRYPOINT ["tabvento"]

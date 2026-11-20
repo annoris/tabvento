@@ -140,6 +140,10 @@ def posthog(monkeypatch, tmp_path):
 	config = tmp_path / 'config'
 	monkeypatch.setattr(service, 'POSTHOG_HOST', f'http://127.0.0.1:{server.server_address[1]}')
 	monkeypatch.setenv('ANONYMIZED_TELEMETRY', 'true')
+	for name in ('BH_TELEMETRY', 'BROWSER_HARNESS_TELEMETRY'):
+		monkeypatch.delenv(name, raising=False)
+	monkeypatch.setenv('BH_CONFIG_DIR', str(tmp_path / 'bh'))
+	monkeypatch.setattr(service, '_harness_config_disabled', None)
 	monkeypatch.setenv('BROWSER_USE_CONFIG_DIR', str(config))
 	monkeypatch.setenv('BROWSER_USE_DEVICE_ID', 'bu-test-device')
 	monkeypatch.setattr(service, '_device_id', None)
@@ -661,6 +665,8 @@ def test_a_failed_cli_command_sends_its_error_message(monkeypatch, sent):
 	for attr in ('_send_detached', '_install_id', 'is_enabled', 'status'):  # restored after the test, wrappers and all
 		monkeypatch.setattr(harness, attr, getattr(harness, attr))
 	monkeypatch.setenv('ANONYMIZED_TELEMETRY', 'true')
+	for name in ('BH_TELEMETRY', 'BROWSER_HARNESS_TELEMETRY'):
+		monkeypatch.delenv(name, raising=False)
 	monkeypatch.setenv('BROWSER_USE_DEVICE_ID', 'bu-test-device')
 	monkeypatch.setattr(sys, 'argv', ['browser-use', '--update'])
 	assert cli.main() == 2
@@ -739,6 +745,8 @@ def test_cli_opt_out_values_match_the_library(monkeypatch, sent, value, sends):
 	monkeypatch.setattr(harness, '_install_id', lambda *a, **k: 'test-install')
 	monkeypatch.setattr(harness, 'is_enabled', lambda: not harness._env_disabled())  # never reads the real config
 	monkeypatch.setenv('ANONYMIZED_TELEMETRY', value)
+	for name in ('BH_TELEMETRY', 'BROWSER_HARNESS_TELEMETRY'):
+		monkeypatch.delenv(name, raising=False)
 	cli._scrub_harness_telemetry()
 	harness.capture_cli_event(action='completed', command='version')
 	assert bool(sent) is sends
@@ -865,6 +873,8 @@ async def test_a_browser_harness_cli_call_from_a_cell_sends_no_telemetry(tmp_pat
 	threading.Thread(target=server.serve_forever, daemon=True).start()
 	monkeypatch.setenv('BH_POSTHOG_HOST', f'http://127.0.0.1:{server.server_address[1]}')
 	monkeypatch.setenv('BH_CONFIG_DIR', str(tmp_path / 'bh-config'))  # never the developer's own telemetry config
+	for name in ('BH_TELEMETRY', 'BROWSER_HARNESS_TELEMETRY'):
+		monkeypatch.delenv(name, raising=False)
 	cli = [sys.executable, '-c', 'from browser_harness.run import main; main()']
 	repl = Repl(tmp_path / 'ws')
 	try:

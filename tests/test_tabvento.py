@@ -451,8 +451,8 @@ class TabventoAPITests(unittest.TestCase):
 		self.assertIn('$88 USD', under_err['error'])
 		self.assertFalse(self.request('GET', '/api/contribution')[1]['contribution']['verified'])
 
-		# Simulated Solana RPC: high contribution ($500 USD in USDC, no maximum limit) succeeds and unlocks live mode
-		high_usdc_rpc = {
+		# Simulated Solana RPC: high contribution without matching device memo is rejected
+		high_usdc_no_memo = {
 			'jsonrpc': '2.0',
 			'id': 1,
 			'result': {
@@ -476,6 +476,49 @@ class TabventoAPITests(unittest.TestCase):
 				},
 			},
 		}
+		with patch('urllib.request.urlopen', return_value=FakeRPCResponse(high_usdc_no_memo)):
+			status, missing_memo_err = self.request('POST', '/api/contribution/verify', {'signature': valid_sig})
+		self.assertEqual(status, 400)
+		self.assertIn(contrib['device_code'], missing_memo_err['error'])
+		self.assertFalse(self.request('GET', '/api/contribution')[1]['contribution']['verified'])
+
+		# Wrong memo is also rejected so unrelated transfers cannot unlock another instance
+		high_usdc_wrong_memo = {
+			'jsonrpc': '2.0',
+			'id': 1,
+			'result': {
+				'meta': {
+					**high_usdc_no_memo['result']['meta'],
+					'logMessages': ['Program log: Memo (len 15): "TV-000000000000"'],
+				},
+				'transaction': high_usdc_no_memo['result']['transaction'],
+			},
+		}
+		with patch('urllib.request.urlopen', return_value=FakeRPCResponse(high_usdc_wrong_memo)):
+			status, wrong_memo_err = self.request('POST', '/api/contribution/verify', {'signature': valid_sig})
+		self.assertEqual(status, 400)
+		self.assertIn(contrib['device_code'], wrong_memo_err['error'])
+
+		# Simulated Solana RPC: high contribution ($500 USD in USDC, no maximum limit) with matching memo succeeds
+		high_usdc_rpc = {
+			'jsonrpc': '2.0',
+			'id': 1,
+			'result': {
+				'meta': high_usdc_no_memo['result']['meta'],
+				'transaction': {
+					'message': {
+						'accountKeys': [{'pubkey': SOLANA_WALLET}],
+						'instructions': [
+							{
+								'program': 'spl-memo',
+								'programId': 'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr',
+								'parsed': contrib['device_code'],
+							}
+						],
+					}
+				},
+			},
+		}
 		with patch('urllib.request.urlopen', return_value=FakeRPCResponse(high_usdc_rpc)):
 			status, verified_resp = self.request('POST', '/api/contribution/verify', {'signature': valid_sig})
 		self.assertEqual(status, 200)
@@ -488,6 +531,24 @@ class TabventoAPITests(unittest.TestCase):
 			status, live_ok = self.request('POST', '/api/missions', {'task': 'Misión real desbloqueada', 'mode': 'live'})
 		self.assertEqual(status, 201)
 		self.assertEqual(live_ok['mission']['mode'], 'live')
+
+		# logMessages memo format is also accepted when verifying directly
+		from tabvento.solana_gate import verify_solana_transaction
+
+		log_memo_rpc = {
+			'jsonrpc': '2.0',
+			'id': 1,
+			'result': {
+				'meta': {
+					**high_usdc_no_memo['result']['meta'],
+					'logMessages': [f'Program log: Memo (len {len(contrib["device_code"])}): "{contrib["device_code"]}"'],
+				},
+				'transaction': high_usdc_no_memo['result']['transaction'],
+			},
+		}
+		with patch('urllib.request.urlopen', return_value=FakeRPCResponse(log_memo_rpc)):
+			verified_log = verify_solana_transaction(valid_sig, expected_memo=contrib['device_code'])
+		self.assertTrue(verified_log['verified'])
 
 
 if __name__ == '__main__':

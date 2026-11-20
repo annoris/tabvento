@@ -10,10 +10,15 @@
 
 <p align="center">
   <a href="https://annoris.github.io/tabvento/"><img src="https://img.shields.io/badge/Live_Showcase-GitHub_Pages-6366f1?style=for-the-badge&logo=githubpages&logoColor=white" alt="Live GitHub Pages Showcase"></a>
-  <a href="https://github.com/annoris/tabvento/actions/workflows/ci.yml"><img src="https://img.shields.io/badge/CI-Passing-10b981?style=for-the-badge&logo=githubactions&logoColor=white" alt="CI Status"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Source--Available-f59e0b?style=for-the-badge" alt="License"></a>
-  <a href="https://docs.astral.sh/uv/"><img src="https://img.shields.io/badge/Package_Manager-uv-blueviolet?style=for-the-badge" alt="uv package manager"></a>
-  <a href="#solana-web3-gate"><img src="https://img.shields.io/badge/Web3_Gate-Solana_Mainnet-14F195?style=for-the-badge&logo=solana&logoColor=black" alt="Solana Web3 Gate"></a>
+  <a href="https://github.com/annoris/tabvento/actions/workflows/ci.yml"><img src="https://github.com/annoris/tabvento/actions/workflows/ci.yml/badge.svg" alt="Tabvento CI"></a>
+  <a href="https://github.com/annoris/tabvento/actions/workflows/pages.yml"><img src="https://github.com/annoris/tabvento/actions/workflows/pages.yml/badge.svg" alt="Deploy GitHub Pages"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Source--Available-f59e0b?style=flat-square" alt="License"></a>
+  <a href="https://docs.astral.sh/uv/"><img src="https://img.shields.io/badge/Package_Manager-uv-blueviolet?style=flat-square" alt="uv package manager"></a>
+  <a href="#-solana-web3-gate-live-browser-mode-activation"><img src="https://img.shields.io/badge/Web3_Gate-Solana_Mainnet-14F195?style=flat-square&logo=solana&logoColor=black" alt="Solana Web3 Gate"></a>
+</p>
+
+<p align="center">
+  <strong>If Tabvento saves you time or tabs, <a href="https://github.com/annoris/tabvento">⭐ Star Tabvento on GitHub</a> to support the project!</strong>
 </p>
 
 ---
@@ -34,6 +39,14 @@ Experience Tabvento directly in your browser without installing anything:
 ## 🚀 Quickstart (Zero-Setup Simulated Demo)
 
 You only need **Python 3.11+** and **[uv](https://docs.astral.sh/uv/)**.
+
+### 1-Command Launch (No Clone Required)
+
+```bash
+uvx --from git+https://github.com/annoris/tabvento tabvento
+```
+
+### From a Local Clone
 
 ```bash
 # 1. Clone the repository
@@ -56,16 +69,16 @@ Open **`http://127.0.0.1:8765`** in your browser and click **Start demo**.
 
 ## 📸 Interface & Workflow Gallery
 
+| Workspace Home | Mission Composer |
+| :---: | :---: |
+| <img src="images/01-inicio.png" alt="Tabvento Workspace Home" width="100%"> | <img src="images/02-escribe-tu-mision.png" alt="Mission Composer" width="100%"> |
+| **Simulated Demo Result Dossier** | **Provider & Solana Connections** |
+| <img src="images/03-resultado-demo.png" alt="Simulated Demo Result Dossier" width="100%"> | <img src="images/05-conexiones.png" alt="Provider & Solana Connections" width="100%"> |
+
 <p align="center">
-  <img src="images/01-inicio.png" width="48%" alt="Tabvento Workspace Home">
-  <img src="images/02-escribe-tu-mision.png" width="48%" alt="Mission Composer">
-</p>
-<p align="center">
-  <img src="images/03-resultado-demo.png" width="48%" alt="Simulated Demo Result Dossier">
-  <img src="images/05-conexiones.png" width="48%" alt="Provider & Solana Connections">
-</p>
-<p align="center">
-  <img src="images/06-example-library-desktop.png" width="98%" alt="24 Mission Example Catalog">
+  <img src="images/06-example-library-desktop.png" width="96%" alt="24 Mission Example Catalog">
+  <br>
+  <em>Built-in 24-mission catalog across Market Research, E-Commerce, Developer QA, Lead Generation, Data Extraction, and Workflow Automation.</em>
 </p>
 
 ---
@@ -78,15 +91,15 @@ Open **`http://127.0.0.1:8765`** in your browser and click **Start demo**.
 |---|---|
 | **Official Solana Wallet** | `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm` |
 | **Minimum Contribution** | **$88.00 USD** (in native **SOL** or **USDC** on Solana Mainnet) |
-| **Maximum Limit** | **No maximum limit** (contributions $\ge \$88\text{ USD}$ unlock permanent access) |
-| **Verification Method** | Direct on-chain RPC lookup via Base58 transaction signature |
-| **Persistence** | Unlocked permanently in local SQLite database (`tabvento.sqlite`) |
+| **Maximum Limit** | **No maximum limit** (contributions ≥ $88 USD unlock permanent access) |
+| **Verification Method** | Direct on-chain RPC lookup via Base58 transaction signature + device memo (`TV-...`) |
+| **Persistence** | Unlocked permanently in local SQLite database (`missions.sqlite3`) |
 
 ### How to Activate:
-1. Transfer $\ge \$88\text{ USD}$ on Solana Mainnet to `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm` (or use the **Open in Solana Pay ↗** button in the dashboard).
-2. Navigate to **Connections** (`http://127.0.0.1:8765#conexiones`).
+1. Navigate to **Connections** (`http://127.0.0.1:8765#conexiones`) to copy your instance's unique device code (`TV-...`).
+2. Transfer ≥ $88 USD on Solana Mainnet to `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm` with your device code in the memo (or click **Open in Solana Pay ↗** to prefill it automatically).
 3. Paste your Base58 transaction signature and click **Verify Solana contribution**.
-4. Tabvento confirms the transaction on-chain and unlocks Live Browser Mode permanently.
+4. Tabvento confirms the transaction and memo on-chain and unlocks Live Browser Mode permanently.
 
 ---
 

@@ -20,7 +20,15 @@ USDC_MINT_MAINNET = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v'
 USDT_MINT_MAINNET = 'Es9vMFrzaCERmJfrF4H2FYD4KCoNkY11McCe8BenwNYB'
 LAMPORTS_PER_SOL = 1_000_000_000
 DEFAULT_SOL_USD_PRICE = 176.0
+SOL_PRICE_URL = 'https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd'
 BASE58_SIGNATURE = re.compile(r'^[1-9A-HJ-NP-Za-km-z]{64,90}$')
+MEMO_PROGRAM_IDS = frozenset(
+	{
+		'MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcHr',
+		'Memo1UhkJRfHyvLMcVucJwxXeuD728EqVDDwQDxFMNo',
+	}
+)
+MEMO_LOG_PATTERN = re.compile(r'^Program log:\s*Memo(?:\s*\(len\s+\d+\))?:\s*"?(.*?)"?\s*$')
 
 
 def device_code_for_path(path: Path) -> str:
@@ -102,6 +110,19 @@ def _sol_usd_price() -> float:
 				return val
 		except ValueError:
 			pass
+	price_url = os.getenv('TABVENTO_SOL_PRICE_URL', SOL_PRICE_URL).strip() or SOL_PRICE_URL
+	try:
+		request = urllib.request.Request(price_url, headers={'Accept': 'application/json'})
+		with urllib.request.urlopen(request, timeout=3) as response:
+			data = json.loads(response.read().decode('utf-8'))
+		if isinstance(data, dict):
+			solana = data.get('solana')
+			if isinstance(solana, dict):
+				val = float(solana.get('usd', 0))
+				if val > 0:
+					return val
+	except (urllib.error.URLError, TimeoutError, ValueError, TypeError):
+		pass
 	return DEFAULT_SOL_USD_PRICE
 
 
@@ -161,6 +182,43 @@ def _extract_pubkeys(result: dict) -> list[str]:
 		elif isinstance(key, dict) and isinstance(key.get('pubkey'), str):
 			pubkeys.append(key['pubkey'])
 	return pubkeys
+
+
+def _collect_instruction_memos(instructions: object, memos: list[str]) -> None:
+	if not isinstance(instructions, list):
+		return
+	for ix in instructions:
+		if not isinstance(ix, dict):
+			continue
+		program = ix.get('program')
+		program_id = ix.get('programId')
+		if program == 'spl-memo' or program_id in MEMO_PROGRAM_IDS:
+			parsed = ix.get('parsed')
+			if isinstance(parsed, str) and parsed.strip():
+				memos.append(parsed.strip())
+
+
+def _extract_memos(result: dict, meta: dict) -> list[str]:
+	memos: list[str] = []
+	tx = result.get('transaction')
+	if isinstance(tx, dict):
+		message = tx.get('message')
+		if isinstance(message, dict):
+			_collect_instruction_memos(message.get('instructions'), memos)
+	inner = meta.get('innerInstructions')
+	if isinstance(inner, list):
+		for group in inner:
+			if isinstance(group, dict):
+				_collect_instruction_memos(group.get('instructions'), memos)
+	logs = meta.get('logMessages')
+	if isinstance(logs, list):
+		for line in logs:
+			if not isinstance(line, str):
+				continue
+			match = MEMO_LOG_PATTERN.match(line.strip())
+			if match and match.group(1).strip():
+				memos.append(match.group(1).strip())
+	return memos
 
 
 def _verify_via_remote_validator(
@@ -307,7 +365,7 @@ def verify_solana_transaction(
 	usdc_delta = max(0.0, post_tokens.get(USDC_MINT_MAINNET, 0.0) - pre_tokens.get(USDC_MINT_MAINNET, 0.0))
 	usdt_delta = max(0.0, post_tokens.get(USDT_MINT_MAINNET, 0.0) - pre_tokens.get(USDT_MINT_MAINNET, 0.0))
 	spl_usd = usdc_delta + usdt_delta
-	sol_usd = (max(0, lamports_delta) / LAMPORTS_PER_SOL) * _sol_usd_price()
+	sol_usd = (lamports_delta / LAMPORTS_PER_SOL) * _sol_usd_price() if lamports_delta > 0 else 0.0
 	total_usd = round(sol_usd + spl_usd, 2)
 
 	if lamports_delta <= 0 and spl_usd <= 0:
@@ -323,6 +381,16 @@ def verify_solana_transaction(
 			if en
 			else f'La contribución mínima es de ${MIN_CONTRIBUTION_USD} USD en SOL o USDC (sin límite máximo). Detectado: ${total_usd:.2f} USD.'
 		)
+
+	if isinstance(expected_memo, str) and expected_memo.strip():
+		wanted = expected_memo.strip()
+		memos = _extract_memos(result, meta)
+		if not any(wanted in memo for memo in memos):
+			raise ValueError(
+				f'Transaction memo does not match this Tabvento instance ({wanted}). Include your device code in the Solana memo.'
+				if en
+				else f'El memo de la transacción no coincide con esta instancia de Tabvento ({wanted}). Incluye tu código de dispositivo en el memo de Solana.'
+			)
 
 	currency = 'USDC' if usdc_delta >= sol_usd and usdc_delta > 0 else ('USDT' if usdt_delta > sol_usd else 'SOL')
 	return {

@@ -1,6 +1,6 @@
 # Contributing to Tabvento
 
-Thank you for contributing to Tabvento! Tabvento is an open-source, local-first AI browser automation platform designed for small and medium businesses, agencies, and enterprise automation.
+Thank you for contributing to Tabvento! Tabvento is a source-available (`LicenseRef-Tabvento`), local-first AI browser automation platform designed for small and medium businesses, agencies, and enterprise automation. See [LICENSE](LICENSE) and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for licensing terms.
 
 ---
 
@@ -14,7 +14,7 @@ Please read and abide by our [Code of Conduct](CODE_OF_CONDUCT.md) in all reposi
 
 - **Python 3.11+** (Python 3.12 recommended)
 - **[uv](https://docs.astral.sh/uv/)** (Fast Python package manager)
-- **Node.js 20+** (For frontend test runner and showcase validation)
+- **Node.js 22+** (For frontend test runner and showcase validation)
 
 ---
 
@@ -22,11 +22,11 @@ Please read and abide by our [Code of Conduct](CODE_OF_CONDUCT.md) in all reposi
 
 ```bash
 # Clone the repository
-git clone https://github.com/annoris/AI-tabvento.git
-cd AI-tabvento
+git clone https://github.com/annoris/tabvento.git
+cd tabvento
 
-# Synchronize virtual environment with all extras
-uv sync --locked --all-extras
+# Synchronize virtual environment with all extras and dev tools
+uv sync --locked --dev --all-extras
 
 # Install frontend test dependencies
 npm ci --prefix tests/frontend
@@ -77,7 +77,8 @@ uv build
 - **Python Indentation**: Use **tabs** (`\t`) for indentation in Python files, per Tabvento architectural rules.
 - **Modern Types**: Use modern Python type unions (`str | None`, `list[dict[str, Any]]`).
 - **Web Frontend**: Vanilla ES modules and clean CSS variables. Do not introduce heavy runtime frameworks into the core dashboard or showcase.
-- **Privacy & Security**: Never commit `.env`, API keys, session tokens, browser cookies, or private SQLite databases (`tabvento.sqlite`).
+- **Privacy & Security**: Never commit `.env`, API keys, session tokens, browser cookies, or private SQLite databases (`missions.sqlite3`).
+- **Licensing**: Preserve third-party code and font licenses (`THIRD_PARTY_NOTICES.md`) and respect `LicenseRef-Tabvento` terms in [LICENSE](LICENSE).
 - **Simulated vs. Live**: Tests must always use simulated models and local fixtures. Never call paid model APIs or external cloud browsers in CI.
 
 ---

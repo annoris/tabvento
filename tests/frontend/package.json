@@ -1,6 +1,9 @@
 {
 	"name": "tabvento-frontend-tests",
 	"private": true,
+	"engines": {
+		"node": ">=22"
+	},
 	"scripts": {
 		"test": "node --test app.test.cjs"
 	},
