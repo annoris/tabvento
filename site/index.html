@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tabvento — Autonomous AI Browser Automation Dashboard</title>
+	<meta name="description" content="Local-first AI browser automation dashboard for small and medium businesses. Zero cloud locks, native multi-provider LLM integration, and bilingual EN/ES workflow.">
+	<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+	<link rel="stylesheet" href="assets/css/fonts.css">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+	<!-- Sticky Header / Navigation -->
+	<header class="site-header">
+		<div class="nav-container">
+			<a href="#hero" class="brand-link">
+				<img src="assets/img/mark.svg" alt="Tabvento Mark" width="32" height="32" class="brand-logo">
+				<span class="brand-title">Tabvento</span>
+				<span class="brand-badge">v0.1.0</span>
+			</a>
+			<nav class="nav-menu">
+				<a href="#simulator" class="nav-item">Mission Runner</a>
+				<a href="#examples" class="nav-item">24 Presets</a>
+				<a href="#solana-gate" class="nav-item">Solana Gate</a>
+				<a href="#providers" class="nav-item">AI Providers</a>
+				<a href="#architecture" class="nav-item">Architecture</a>
+			</nav>
+			<div class="nav-actions">
+				<div class="lang-switch-wrap">
+					<button type="button" class="lang-btn active" data-lang="en">EN</button>
+					<span class="lang-divider">/</span>
+					<button type="button" class="lang-btn" data-lang="es">ES</button>
+				</div>
+				<span id="nav-gate-badge" class="badge-gate badge-demo">Simulated Demo</span>
+				<a href="https://github.com/annoris/AI-tabvento" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">
+					GitHub ↗
+				</a>
+			</div>
+		</div>
+	</header>
+
+	<main class="site-main">
+		<!-- 1. Hero Section -->
+		<section id="hero" class="hero-section">
+			<div class="hero-inner">
+				<div class="hero-tag-wrap">
+					<span class="badge-accent">Local-First AI Browser Automation</span>
+					<span class="badge-subtle">Bilingual EN / ES Native</span>
+				</div>
+				<h1 class="hero-headline">
+					Autonomous AI Browser Automation for <span class="text-gradient">Modern Business</span>
+				</h1>
+				<p class="hero-description">
+					Run real local Chrome automation or zero-cost simulated sandbox missions. Designed for SMEs, agile agencies, and enterprise automation with zero cloud locks and strict data privacy.
+				</p>
+				<div class="hero-cta-group">
+					<a href="#simulator" class="btn btn-primary btn-lg" id="hero-btn-demo">Run Interactive Simulator</a>
+					<a href="#examples" class="btn btn-secondary btn-lg">Explore 24 Presets</a>
+					<div class="cli-command-box" title="Click to copy CLI command">
+						<code id="cli-text">uv run tabvento</code>
+						<button type="button" class="btn-copy-icon" id="hero-btn-copy-cli" aria-label="Copy CLI command">📋</button>
+					</div>
+				</div>
+
+				<!-- Executive KPI Metric Cards -->
+				<div class="kpi-grid">
+					<div class="kpi-card">
+						<div class="kpi-value text-accent">24</div>
+						<div class="kpi-label">Mission Presets</div>
+						<div class="kpi-sub">Research, E-Com, QA, Leads</div>
+					</div>
+					<div class="kpi-card">
+						<div class="kpi-value text-primary">0%</div>
+						<div class="kpi-label">Cloud Leaks</div>
+						<div class="kpi-sub">Loopback SQLite & Local Chrome</div>
+					</div>
+					<div class="kpi-card">
+						<div class="kpi-value text-solana">≥ $88</div>
+						<div class="kpi-label">Solana Web3 Gate</div>
+						<div class="kpi-sub">On-chain unlock · No max limit</div>
+					</div>
+					<div class="kpi-card">
+						<div class="kpi-value text-warning">5+</div>
+						<div class="kpi-label">Model Providers</div>
+						<div class="kpi-sub">OpenAI, Claude, Gemini, Ollama</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 2. Interactive Simulator Section -->
+		<section id="simulator" class="section-container">
+			<div class="section-header">
+				<div class="section-subtitle">Interactive Mission Simulator</div>
+				<h2 class="section-title">Experience Browser Orchestration in Real-Time</h2>
+				<p class="section-lead">
+					Test Tabvento's 4-phase deterministic execution pipeline directly in your browser. Choose a preset or write a custom goal.
+				</p>
+			</div>
+
+			<div class="simulator-layout">
+				<!-- Left Panel: Composer & Mode Controls -->
+				<div class="composer-card">
+					<div class="composer-header">
+						<h3 class="composer-title">Compose Mission Draft</h3>
+						<div class="mode-tabs">
+							<button type="button" id="mode-tab-demo" class="mode-tab active">Simulated Demo (Free)</button>
+							<button type="button" id="mode-tab-live" class="mode-tab">Live Browser (Web3)</button>
+						</div>
+					</div>
+					<div id="mode-meta-tip" class="mode-tip-box">
+						💡 <strong>Simulated Demo Mode:</strong> 100% keyless sandbox testing. Simulates DOM inspection, synthetic token accounting, and generates structured reports.
+					</div>
+
+					<div class="form-group">
+						<label for="preset-selector" class="form-label">Select from 24 curated business presets:</label>
+						<select id="preset-selector" class="form-select">
+							<option value="">-- Choose an existing preset --</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="mission-prompt-input" class="form-label">Mission Objective / Prompt:</label>
+						<textarea id="mission-prompt-input" class="form-textarea" rows="4" placeholder="Describe the browser objective you want Tabvento to accomplish..."></textarea>
+					</div>
+
+					<div class="composer-actions">
+						<button type="button" id="btn-run-mission" class="btn btn-primary btn-block">▶ Start Mission</button>
+						<div class="btn-group-dual">
+							<button type="button" id="btn-pause-mission" class="btn btn-secondary btn-sm" disabled>⏸ Pause</button>
+							<button type="button" id="btn-resume-mission" class="btn btn-secondary btn-sm" style="display:none;">▶ Resume</button>
+							<button type="button" id="btn-cancel-mission" class="btn btn-danger btn-sm" disabled>⏹ Stop</button>
+							<button type="button" id="btn-reset-mission" class="btn btn-secondary btn-sm">↺ Reset</button>
+						</div>
+					</div>
+				</div>
+
+				<!-- Right Panel: Virtual Viewport, HUD & Live Terminal -->
+				<div class="viewport-card">
+					<!-- Realtime HUD Telemetry -->
+					<div class="hud-bar">
+						<div class="hud-item">
+							<span class="hud-label">STATUS</span>
+							<span id="hud-status-pill" class="badge-status status-idle">
+								<span class="status-dot"></span>
+								<span id="hud-status-text">IDLE</span>
+							</span>
+						</div>
+						<div class="hud-item">
+							<span class="hud-label">STEP</span>
+							<span id="hud-step-val" class="hud-value">0 / 4</span>
+						</div>
+						<div class="hud-item">
+							<span class="hud-label">TIME</span>
+							<span id="hud-time-val" class="hud-value">0.0s</span>
+						</div>
+						<div class="hud-item">
+							<span class="hud-label">TOKENS</span>
+							<span id="hud-tokens-val" class="hud-value">0</span>
+						</div>
+						<div class="hud-item">
+							<span class="hud-label">DOM OPS</span>
+							<span id="hud-ops-val" class="hud-value">0</span>
+						</div>
+					</div>
+
+					<!-- Virtual Browser Stage -->
+					<div class="virtual-browser">
+						<div class="browser-chrome-bar">
+							<div class="traffic-lights">
+								<span class="light red"></span>
+								<span class="light yellow"></span>
+								<span class="light green"></span>
+							</div>
+							<div class="browser-address-bar">
+								<span class="lock-icon">🔒</span>
+								<span id="browser-url-text">https://tabvento.local/mission</span>
+							</div>
+							<div class="browser-actions-bar">
+								<span class="browser-opt">⚙</span>
+							</div>
+						</div>
+
+						<div id="viewport-content-box" class="viewport-stage">
+							<div class="viewport-overlay">
+								<h4 id="viewport-title">Tabvento Autonomous Browser Stage</h4>
+								<div id="viewport-body" class="viewport-text">Select a mission preset and click "Start Mission" to observe real-time DOM interaction and step transitions.</div>
+							</div>
+							<div id="virtual-cursor" class="virtual-mouse" style="display:none;"></div>
+						</div>
+					</div>
+
+					<!-- Terminal Console Output -->
+					<div class="terminal-card">
+						<div class="terminal-header">
+							<span class="terminal-title">TERMINAL LOG OUTPUT</span>
+							<span class="terminal-pulse">LIVE</span>
+						</div>
+						<div id="terminal-log-view" class="terminal-log-view">
+							<div class="log-line log-system">[00:00:00] Tabvento Engine v0.1.0 initialized in loopback context.</div>
+							<div class="log-line log-info">[00:00:00] Ready for mission submission. SQLite persistence online.</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Result Dossier Inspector -->
+			<div id="result-inspector" class="result-inspector-card" style="display:none;">
+				<div class="result-header">
+					<div class="result-title-wrap">
+						<span class="badge-success">MISSION COMPLETED</span>
+						<h3 class="result-title">Executive Mission Dossier</h3>
+					</div>
+					<div class="result-actions">
+						<button type="button" id="btn-copy-result" class="btn btn-secondary btn-sm">📋 Copy Report</button>
+						<button type="button" id="btn-download-json" class="btn btn-secondary btn-sm">💾 Export JSON</button>
+						<button type="button" id="btn-download-md" class="btn btn-secondary btn-sm">📄 Export Markdown</button>
+					</div>
+				</div>
+				<div class="result-tabs">
+					<button type="button" class="result-tab active" data-tab="summary">Executive Summary</button>
+					<button type="button" class="result-tab" data-tab="json">Structured JSON</button>
+					<button type="button" class="result-tab" data-tab="md">Markdown Dossier</button>
+				</div>
+				<div class="result-content-wrap">
+					<div id="result-tab-summary-content" class="result-pane active"></div>
+					<pre id="result-tab-json-content" class="result-pane code-pane" style="display:none;"></pre>
+					<pre id="result-tab-md-content" class="result-pane code-pane" style="display:none;"></pre>
+				</div>
+			</div>
+		</section>
+
+		<!-- 3. 24 Mission Presets Library Section -->
+		<section id="examples" class="section-container">
+			<div class="section-header">
+				<div class="section-subtitle">Comprehensive Mission Catalog</div>
+				<h2 class="section-title">24 Production Mission Examples</h2>
+				<p class="section-lead">
+					Pre-built automated workflows for small businesses, agencies, and enterprise operations. Click any mission to load it directly into the simulator.
+				</p>
+			</div>
+
+			<div class="library-controls">
+				<div class="category-pills">
+					<button type="button" class="cat-pill active" data-cat="all">All Presets (24)</button>
+					<button type="button" class="cat-pill" data-cat="research">Market Research</button>
+					<button type="button" class="cat-pill" data-cat="ecommerce">E-Commerce</button>
+					<button type="button" class="cat-pill" data-cat="qa">Developer QA</button>
+					<button type="button" class="cat-pill" data-cat="leads">Lead Gen</button>
+					<button type="button" class="cat-pill" data-cat="extraction">Data Extraction</button>
+					<button type="button" class="cat-pill" data-cat="automation">Workflow</button>
+				</div>
+				<div class="search-wrap">
+					<input type="text" id="library-search-input" class="search-input" placeholder="Search 24 examples by title, goal, or tags...">
+				</div>
+			</div>
+
+			<div id="examples-grid-container" class="examples-grid">
+				<!-- Dynamically populated by assets/js/app.js from assets/js/examples.js -->
+			</div>
+		</section>
+
+		<!-- 4. Solana Web3 Gate Section -->
+		<section id="solana-gate" class="section-container">
+			<div class="section-header">
+				<div class="section-subtitle">Web3 On-Chain Activation</div>
+				<h2 class="section-title">Solana Activation Gate ($88+ USD)</h2>
+				<p class="section-lead">
+					Simulated Demo Mode is 100% free with zero keys. To unlock <strong>Live Browser Mode</strong> with a real local Chromium browser, Tabvento verifies a contribution on the Solana Mainnet.
+				</p>
+			</div>
+
+			<div class="gate-grid">
+				<div class="gate-info-card">
+					<div class="gate-badge-row">
+						<img src="assets/img/solana-badge.svg" alt="Solana Gate" width="120" height="28">
+						<span class="gate-rule">Minimum $88 USD · No Maximum Limit</span>
+					</div>
+					<h3 class="gate-title">How On-Chain Activation Works</h3>
+					<ul class="gate-steps-list">
+						<li>
+							<div class="step-num">1</div>
+							<div class="step-desc">
+								<strong>Send Contribution:</strong> Transfer ≥ $88 USD (in native SOL or USDC) to the official Tabvento wallet on Solana Mainnet.
+							</div>
+						</li>
+						<li>
+							<div class="step-num">2</div>
+							<div class="step-desc">
+								<strong>Paste Signature:</strong> Copy your Base58 transaction hash from Phantom, Solflare, or SolanaFM and submit it below.
+							</div>
+						</li>
+						<li>
+							<div class="step-num">3</div>
+							<div class="step-desc">
+								<strong>Instant RPC Verification:</strong> Tabvento queries confirmed on-chain transactions and unlocks permanent local Live Mode in SQLite.
+							</div>
+						</li>
+					</ul>
+
+					<div class="wallet-box">
+						<div class="wallet-label">Official Solana Wallet Address:</div>
+						<div class="wallet-value-row">
+							<code id="solana-wallet-address" class="wallet-code">3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm</code>
+							<button type="button" id="btn-copy-solana-wallet" class="btn btn-secondary btn-sm">Copy</button>
+						</div>
+					</div>
+
+					<div class="gate-action-row">
+						<a href="solana:3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm?amount=88&spl-token=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" id="btn-open-solana-pay" class="btn btn-solana">
+							Open in Solana Pay ↗
+						</a>
+						<span class="text-muted text-sm">Accepts SOL and USDC on Solana Mainnet</span>
+					</div>
+				</div>
+
+				<div class="gate-verifier-card">
+					<h3 class="verifier-title">Interactive Signature Verifier</h3>
+					<p class="verifier-desc">
+						Test the on-chain signature verification simulation or check your actual transaction status.
+					</p>
+
+					<div class="form-group">
+						<label for="solana-sig-input" class="form-label">Solana Transaction Signature (Base58):</label>
+						<input type="text" id="solana-sig-input" class="form-input" placeholder="e.g. 5KnbGgY8m6b3d... (64-88 Base58 chars)">
+					</div>
+
+					<div class="verifier-actions">
+						<button type="button" id="btn-verify-sig" class="btn btn-primary">Verify On-Chain Transaction</button>
+						<button type="button" id="btn-use-demo-sig" class="btn btn-secondary">Fill Valid Demo Signature</button>
+					</div>
+
+					<div id="gate-verifier-status-box" class="gate-status-box">
+						<div class="status-row">
+							<span class="status-key">Live Mode Status:</span>
+							<span class="status-val text-warning">LOCKED (Demo Mode Active)</span>
+						</div>
+						<div class="status-row">
+							<span class="status-key">Minimum Required:</span>
+							<span class="status-val">$88.00 USD</span>
+						</div>
+						<div class="status-row">
+							<span class="status-key">Target Wallet:</span>
+							<span class="status-val">3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm</span>
+						</div>
+					</div>
+
+					<div style="margin-top: 1rem; text-align: right;">
+						<button type="button" id="btn-relock-gate" class="btn btn-secondary btn-xs" style="display:none;">Re-lock Gate</button>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- 5. Provider Configuration Section -->
+		<section id="providers" class="section-container">
+			<div class="section-header">
+				<div class="section-subtitle">Model Flexibility</div>
+				<h2 class="section-title">Direct AI Model Provider Integration</h2>
+				<p class="section-lead">
+					Tabvento connects directly to your preferred AI model provider. API keys stay in your local <code>.env</code> file, never exposed to browser frontends or external servers.
+				</p>
+			</div>
+
+			<div class="providers-grid">
+				<div class="provider-card">
+					<div class="provider-icon">⚡</div>
+					<h3 class="provider-name">OpenAI</h3>
+					<div class="provider-models">gpt-4o · gpt-4o-mini · o1 · o3-mini</div>
+					<p class="provider-desc">Industry-standard reasoning and vision for complex multi-step browser interactions.</p>
+					<code class="provider-env">OPENAI_API_KEY=sk-...</code>
+				</div>
+				<div class="provider-card">
+					<div class="provider-icon">🧠</div>
+					<h3 class="provider-name">Anthropic Claude</h3>
+					<div class="provider-models">claude-3-7-sonnet · claude-3-5-haiku</div>
+					<p class="provider-desc">Exceptional coding, document parsing, and agentic tool use for long web sessions.</p>
+					<code class="provider-env">ANTHROPIC_API_KEY=sk-ant-...</code>
+				</div>
+				<div class="provider-card">
+					<div class="provider-icon">🌐</div>
+					<h3 class="provider-name">Google Gemini</h3>
+					<div class="provider-models">gemini-2.0-flash · gemini-1.5-pro</div>
+					<p class="provider-desc">Blazing speed and expansive context windows for high-throughput browser tasks.</p>
+					<code class="provider-env">GOOGLE_API_KEY=AIzaSy...</code>
+				</div>
+				<div class="provider-card">
+					<div class="provider-icon">🦙</div>
+					<h3 class="provider-name">Local Ollama</h3>
+					<div class="provider-models">llama3.2 · qwen2.5 · mistral · deepseek-r1</div>
+					<p class="provider-desc">100% private, zero external API costs. Runs locally via loopback endpoint.</p>
+					<code class="provider-env">http://127.0.0.1:11434/v1</code>
+				</div>
+				<div class="provider-card">
+					<div class="provider-icon">🔌</div>
+					<h3 class="provider-name">OpenAI-Compatible</h3>
+					<div class="provider-models">vLLM · Together · Groq · DeepSeek · OpenRouter</div>
+					<p class="provider-desc">Universal adapter for custom self-hosted inference servers and third-party gateways.</p>
+					<code class="provider-env">TABVENTO_COMPATIBLE_API_KEY=...</code>
+				</div>
+			</div>
+		</section>
+
+		<!-- 6. Architecture & System Tour Section -->
+		<section id="architecture" class="section-container">
+			<div class="section-header">
+				<div class="section-subtitle">System Design</div>
+				<h2 class="section-title">Local-First Architecture & Privacy Boundaries</h2>
+				<p class="section-lead">
+					Built with zero cloud dependencies, strict loopback HTTP security, and thread-isolated SQLite storage.
+				</p>
+			</div>
+
+			<div class="arch-layout">
+				<div class="arch-diagram-card">
+					<div class="arch-flow">
+						<div class="flow-node">
+							<div class="node-badge">FRONTEND</div>
+							<div class="node-title">Bilingual Dashboard (EN/ES)</div>
+							<div class="node-sub">Vanilla JS, CSS Grid, Zero CDN</div>
+						</div>
+						<div class="flow-arrow">⬇ HTTP Loopback (127.0.0.1:8765)</div>
+						<div class="flow-node">
+							<div class="node-badge">API SERVER</div>
+							<div class="node-title">Local Python HTTP & Security Gate</div>
+							<div class="node-sub">Origin, Sec-Fetch, Host, CSP hardening</div>
+						</div>
+						<div class="flow-arrow">⬇ Local Dispatch</div>
+						<div class="flow-split">
+							<div class="flow-node split-node">
+								<div class="node-badge">FREE MODE</div>
+								<div class="node-title">Simulated Demo Runner</div>
+								<div class="node-sub">Synthetic sandbox, 0 cost</div>
+							</div>
+							<div class="flow-node split-node">
+								<div class="node-badge">SOLANA GATE</div>
+								<div class="node-title">Web3 On-Chain Gate</div>
+								<div class="node-sub">≥ $88 USD on Solana Mainnet</div>
+							</div>
+						</div>
+						<div class="flow-arrow">⬇ Execution Engine</div>
+						<div class="flow-node">
+							<div class="node-badge">AUTOMATION ENGINE</div>
+							<div class="node-title">Browser Automation & LLM Adapter</div>
+							<div class="node-sub">Local Chromium control via CDP</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="arch-inspector-card">
+					<h3 class="inspector-title">Security & Execution Boundaries</h3>
+					<div id="arch-inspector-box" class="arch-info-content">
+						<div class="security-bullet">
+							<strong>🔒 Loopback Isolation:</strong> The dashboard binds exclusively to <code>127.0.0.1</code> and rejects non-loopback Host headers to thwart DNS rebinding.
+						</div>
+						<div class="security-bullet">
+							<strong>🛡️ Key Zero-Exposure:</strong> LLM keys remain strictly in local environment variables (<code>.env</code>) and are never stored in SQLite or passed to browser DOM.
+						</div>
+						<div class="security-bullet">
+							<strong>💾 Local SQLite Storage:</strong> All mission transcripts, task steps, and configuration states persist in an unencrypted local SQLite database on your machine.
+						</div>
+						<div class="security-bullet">
+							<strong>⚡ Zero Docker Footprint:</strong> Runs directly with native Python 3.11+ and <code>uv</code>. No Docker daemons, background containers, or cloud subscriptions required.
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- Footer Section -->
+	<footer id="footer" class="site-footer">
+		<div class="footer-inner">
+			<div class="footer-brand">
+				<img src="assets/img/mark.svg" alt="Tabvento Mark" width="28" height="28">
+				<span class="footer-title">Tabvento</span>
+				<span class="footer-copy">Autonomous AI Browser Automation Dashboard</span>
+			</div>
+			<div class="footer-links">
+				<a href="https://github.com/annoris/AI-tabvento" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
+				<a href="https://github.com/annoris/AI-tabvento/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a>
+				<a href="https://github.com/annoris/AI-tabvento/blob/main/.github/SECURITY.md" target="_blank" rel="noopener noreferrer">Security Policy</a>
+				<a href="https://github.com/annoris/AI-tabvento/blob/main/.github/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing</a>
+			</div>
+			<div class="footer-bottom">
+				<p>Copyright &copy; 2026 Tabvento. Distributed under open-source and commercial licensing terms.</p>
+				<p class="footer-solana">Official Solana Verification Wallet: <code>3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm</code></p>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Global Toast Notifications -->
+	<div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+	<!-- Scripts -->
+	<script src="assets/js/examples.js"></script>
+	<script src="assets/js/simulator.js"></script>
+	<script src="assets/js/app.js"></script>
+</body>
+</html>

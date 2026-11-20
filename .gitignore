@@ -1,42 +1,95 @@
-# Cache files
+# Operating System & Filesystem Junk
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Python / Bytecode / Caches
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyo
+*.pyd
 .mypy_cache/
 .ruff_cache/
 .pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
 .ipynb_checkpoints
-~/
 
 # Virtual Environments
-.venv*
+.venv/
+.venv*/
 venv/
-node_modules/
+ENV/
+env/
 
-# IDEs
+# Package Builds & Distribution
+dist/
+build/
+*.egg-info/
+*.egg
+eggs/
+.eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+*.manifest
+*.spec
+*.whl
+*.tar.gz
+
+# Node / Frontend Dependencies
+node_modules/
+site/node_modules/
+tests/frontend/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# IDE & Editor Files
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
 
-# Build files
-dist/
-
-# Data files
-*.gif
-*.txt
-*.pdf
-*.csv
-*.json
-*.jsonl
-*.log
-*.bak
-
-# Secrets and sensitive files
-secrets.env
+# Secrets, Environment & Credentials
 .env
+.env.*
+!.env.example
+secrets.env
+*.pem
+*.key
+*.p12
+*.pfx
+credentials.json
+token.json
+gcp-login.json
 browser_cookies.json
 cookies.json
-gcp-login.json
+
+# Tabvento Local Databases & Runtime Artifacts
+*.sqlite
+*.sqlite3
+*.db
+*.db-shm
+*.db-wal
+.tabvento/
+.tabvento-data/
 saved_trajectories/
 old_tests/
 AgentHistory.json
@@ -44,34 +97,16 @@ AgentHistoryList.json
 private_example.py
 private_example
 CLAUDE.local.md
-
+temp-profile-*
 temp
 tmp
-
-# Google API credentials
-credentials.json
-token.json
-
-!docs/docs.json
-!tests/frontend/package.json
-!tests/frontend/package-lock.json
-!tabvento/web/fonts/*-OFL.txt
-
-
-temp-profile-*
-
 screenshot.png
 
-# *.md
-
+# Upstream Scratch / Issue Notes
 all_github_issues_progress.md
 all_github_issues.md
-
 todo-input-token.md
-
 TOOL_CHANGES_SUMMARY.md
-
-
 claude-code-todo
 result_judge.md
 result.md
@@ -85,28 +120,15 @@ product_extraction.ipynb
 product_extraction.py
 *report.md
 plot.py
-
 .claude/
-
-# Local runtime and credentials
-.env.*
-!.env.example
-*.sqlite
-*.sqlite3
-*.db
-*.db-shm
-*.db-wal
-*.pem
-*.key
-*.p12
-*.pfx
-.tabvento/
-.tabvento-data/
-build/
-*.egg-info/
-
-# Unused visual assets inherited from the original project
 /static/
 /context7.json
 /Tabvento-LinkedIn/
 
+# Whitelisted files
+!package.json
+!package-lock.json
+!docs/docs.json
+!tests/frontend/package.json
+!tests/frontend/package-lock.json
+!tabvento/web/fonts/*-OFL.txt

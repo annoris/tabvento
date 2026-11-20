@@ -1,0 +1,34 @@
+name: Feature Request
+description: Propose a new feature, integration, or improvement for Tabvento.
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping improve Tabvento! Please outline the business context, problem statement, and proposed automation capability.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Is your feature request related to a problem?
+      description: A clear and concise description of the limitation or workflow gap you are experiencing.
+      placeholder: "I am always frustrated when..."
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed Solution or Workflow
+      description: Describe your proposed enhancement and how it should behave.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Any alternative solutions, libraries, or workarounds you have evaluated.
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: Add any relevant mockups, diagrams, or mission examples.

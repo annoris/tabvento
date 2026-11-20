@@ -33,7 +33,15 @@ def install() -> None:
 		while True:
 			try:
 				return original()
-			except RuntimeError as e:
+			except (RuntimeError, TimeoutError) as e:
+				# The dialog can open after the helper's initial probe but before its Runtime.evaluate finishes.
+				# Preserve page_info's documented {dialog} result even when that evaluate is interrupted or frozen.
+				try:
+					dialog = helpers._send({'meta': 'pending_dialog'}).get('dialog')
+				except Exception:  # a disconnected daemon must keep the original error
+					dialog = None
+				if dialog:
+					return {'dialog': dialog}
 				if NO_ROOT not in str(e) or time.monotonic() >= deadline:
 					raise
 			time.sleep(0.05)

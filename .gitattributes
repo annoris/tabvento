@@ -1,4 +1,43 @@
-* text=auto
-*.woff2 binary
-*.png binary
-*.jpg binary
+# Auto-detect text files and normalize line endings to LF across all operating systems
+* text=auto eol=lf
+
+# Explicitly ensure LF line endings for text source files
+*.py text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+*.ts text eol=lf
+*.json text eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.md text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.toml text eol=lf
+*.sh text eol=lf
+*.txt text eol=lf
+.editorconfig text eol=lf
+.gitignore text eol=lf
+.gitattributes text eol=lf
+
+# Binary files - prevent text transformations and diff generation
+*.png binary -diff
+*.jpg binary -diff
+*.jpeg binary -diff
+*.gif binary -diff
+*.ico binary -diff
+*.svg binary -diff
+*.webp binary -diff
+*.woff binary -diff
+*.woff2 binary -diff
+*.ttf binary -diff
+*.eot binary -diff
+*.otf binary -diff
+*.whl binary -diff
+*.tar.gz binary -diff
+*.zip binary -diff
+*.pdf binary -diff
+*.db binary -diff
+*.sqlite binary -diff
+*.sqlite3 binary -diff
+*.pyc binary -diff

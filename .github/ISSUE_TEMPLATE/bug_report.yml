@@ -1,0 +1,62 @@
+name: Bug Report
+description: Report a reproducible issue or defect in Tabvento.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting an issue! Please verify that no sensitive data, API keys, private tokens, or confidential mission parameters are included.
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating System, Python version, and browser details.
+      placeholder: "e.g., macOS 14.5 / Ubuntu 24.04, Python 3.12, Node 20"
+    validations:
+      required: true
+  - type: dropdown
+    id: mode
+    attributes:
+      label: Execution Mode
+      description: Which execution mode or subsystem was active?
+      options:
+        - "Simulated Demo Mode (local mock, zero keys required)"
+        - "Live Browser Mode (provider configured & Solana verified)"
+        - "Web Dashboard UI (tabvento/web)"
+        - "Internal Automation Engine (browser_use)"
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Detailed sequence of actions to trigger the behavior.
+      placeholder: |
+        1. Start Tabvento server with `python -m tabvento.server`
+        2. Navigate to http://localhost:8080
+        3. Submit a new mission
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual vs. Expected Behavior
+      description: Describe what happened versus what you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or Traceback
+      description: Paste sanitized console output or traceback without credentials.
+      render: shell
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: Hygiene Checklist
+      options:
+        - label: I confirmed that no API keys, cookies, or private tokens are present in this report.
+          required: true
+        - label: I searched existing issues to ensure this is not a duplicate.
+          required: false

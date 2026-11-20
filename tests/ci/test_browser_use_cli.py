@@ -566,6 +566,40 @@ async def test_the_documented_first_example_waits_for_the_new_document(daemon, t
 	assert not failed and 'late body True' in out, out
 
 
+@pytest.mark.parametrize('error', [RuntimeError('A JavaScript alert is open'), TimeoutError('evaluate timed out')])
+def test_page_info_reports_a_dialog_opened_after_the_initial_probe(monkeypatch, error):
+	from browser_harness import helpers
+
+	from browser_use.repl.page_info import install
+
+	def interrupted_page_info():
+		raise error
+
+	dialog = {'type': 'alert', 'message': 'hi'}
+	monkeypatch.setattr(helpers, 'page_info', interrupted_page_info)
+	monkeypatch.setattr(helpers, '_send', lambda request: {'dialog': dialog})
+	install()
+	assert helpers.page_info() == {'dialog': dialog}
+
+
+def test_page_info_preserves_an_evaluate_error_when_no_dialog_is_open(monkeypatch):
+	from browser_harness import helpers
+
+	from browser_use.repl.page_info import install
+
+	error = RuntimeError('unrelated evaluate failure')
+
+	def interrupted_page_info():
+		raise error
+
+	monkeypatch.setattr(helpers, 'page_info', interrupted_page_info)
+	monkeypatch.setattr(helpers, '_send', lambda request: {'dialog': None})
+	install()
+	with pytest.raises(RuntimeError) as caught:
+		helpers.page_info()
+	assert caught.value is error
+
+
 async def test_page_info_waiting_for_the_document_still_reports_a_dialog(daemon, monkeypatch):
 	"""cli-1: a page that alert()s as it loads opens the dialog while page_info() waits for <html>. page_info() returns
 	{dialog}, as browser-harness documents, instead of timing out on an evaluate the open dialog blocks."""

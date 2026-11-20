@@ -1,118 +1,198 @@
 <p align="center">
-  <img src="tabvento/web/mark.svg" width="72" height="72" alt="Tabvento mark">
+  <img src="tabvento/web/mark.svg" width="80" height="80" alt="Tabvento mark">
 </p>
 
 <h1 align="center">Tabvento</h1>
-<p align="center"><strong>Give your browser a mission.</strong></p>
-<p align="center">A local-first AI browser automation dashboard. Bring your model, follow the mission, keep the history.</p>
+<p align="center"><strong>Autonomous AI Browser Automation Dashboard</strong></p>
+<p align="center">
+  A local-first, privacy-focused browser automation workspace. Run keyless simulated sandbox tests or unlock full local Chromium automation with your preferred AI provider.
+</p>
 
-Tabvento turns a browser task into a structured workspace you can follow: describe an objective, run a mission, and review its steps and result. The dashboard defaults to **English (`EN`)** with instant switching to **Spanish (`ES`)**, and includes a keyless **Simulated Demo Mode** so anyone can download and test the workflow before activating live execution.
-
-**Copyright © 2026 Tabvento · Local-first AI Browser Mission Desk**
-
-[Quick Start](docs/QUICKSTART.md) · [24 Mission Examples](docs/EXAMPLES.md) · [Full Guide](docs/tabvento.md) · [Official License](LICENSE) · [Contribute](.github/CONTRIBUTING.md) · [Security](.github/SECURITY.md)
+<p align="center">
+  <a href="https://annoris.github.io/AI-tabvento/"><img src="https://img.shields.io/badge/Live_Showcase-GitHub_Pages-6366f1?style=for-the-badge&logo=githubpages&logoColor=white" alt="Live GitHub Pages Showcase"></a>
+  <a href="https://github.com/annoris/AI-tabvento/actions/workflows/ci.yml"><img src="https://img.shields.io/badge/CI-Passing-10b981?style=for-the-badge&logo=githubactions&logoColor=white" alt="CI Status"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Source--Available-f59e0b?style=for-the-badge" alt="License"></a>
+  <a href="https://docs.astral.sh/uv/"><img src="https://img.shields.io/badge/Package_Manager-uv-blueviolet?style=for-the-badge" alt="uv package manager"></a>
+  <a href="#solana-web3-gate"><img src="https://img.shields.io/badge/Web3_Gate-Solana_Mainnet-14F195?style=for-the-badge&logo=solana&logoColor=black" alt="Solana Web3 Gate"></a>
+</p>
 
 ---
 
-## 1. Try Simulated Demo Mode (100% Free, Zero Setup)
+## 🌟 Interactive Live Showcase
 
-You need **Python 3.11+** and [uv](https://docs.astral.sh/uv/). From the project directory:
+Experience Tabvento directly in your browser without installing anything:
+
+👉 **[Launch Interactive GitHub Pages Showcase (https://annoris.github.io/AI-tabvento/)](https://annoris.github.io/AI-tabvento/)**
+
+- **Simulated Mission Runner:** Watch step-by-step DOM interactions, telemetry HUD, and synthetic token counters in real-time.
+- **24 Curated Presets Library:** Searchable and filterable business missions for Market Research, E-Commerce, Developer QA, Lead Gen, and Data Extraction.
+- **Solana Web3 Gate Simulator:** Test Base58 signature validation against the official wallet.
+- **Bilingual Switcher:** Instant one-click toggle between English (`EN`) and Spanish (`ES`).
+
+---
+
+## 🚀 Quickstart (Zero-Setup Simulated Demo)
+
+You only need **Python 3.11+** and **[uv](https://docs.astral.sh/uv/)**.
 
 ```bash
+# 1. Clone the repository
+git clone https://github.com/annoris/AI-tabvento.git
+cd AI-tabvento
+
+# 2. Synchronize environment with locked dependencies
 uv sync --locked --all-extras
+
+# 3. Launch Tabvento local dashboard
 uv run tabvento
 ```
 
-Open **http://127.0.0.1:8765** in your browser and click **Start demo** (or select **Simulated demo** in the mission composer). Watch the mission progress through its timeline steps, inspect the result, and manage your local SQLite history.
-
-- On macOS, you can also double-click `Tabvento.command`.
-- Use `uv run tabvento --port 8766` if port `8765` is already in use.
-- Simulated Demo Mode does not visit websites, call an AI model, or require an API key.
-
----
-
-## 2. Unlock Live Browser Mode (Solana On-Chain Activation · Minimum $88 USD, No Maximum Limit)
-
-**Simulated Demo Mode (`mode: "demo"`) is completely free.** To unlock **Live Browser Mode (`mode: "live"`)** with a real local Chromium browser and your configured AI provider:
-
-- **Official Solana Wallet:** `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm`
-- **Minimum Activation Payment:** **$88 USD** (in native **SOL** or **USDC** on Solana Mainnet)
-- **Maximum Limit:** **No maximum limit** (any payment equal to or greater than `$88 USD` is valid; amounts above the minimum are optional support)
-- **On-Chain Verification:**
-  1. Send your activation payment (`>= $88 USD`, no maximum limit) on Solana Mainnet to `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm` (or use the **Open in Solana Pay ↗** button in the dashboard).
-  2. Open the **Connections** tab at `http://127.0.0.1:8765#conexiones`.
-  3. Paste your Base58 **Solana Transaction Signature** and click **Verify Solana contribution**.
-  4. Tabvento verifies the confirmed transaction on-chain and saves your unlocked activation in local SQLite.
-
-### Configuring Your AI Model Provider for Live Missions
-
-1. Install Chrome/Chromium (or install Chromium via `uv run python -m browser_use install`).
-2. Copy `.env.example` to `.env` and set the API key for your chosen provider (`OPENAI_API_KEY`, `ANTHROPIC_API_KEY`, `GOOGLE_API_KEY`, or `TABVENTO_COMPATIBLE_API_KEY`). Restart Tabvento after updating `.env`.
-3. In **Connections**, select your provider (OpenAI, Anthropic, Google Gemini, OpenAI-compatible API, or Local Ollama) and enter the exact model identifier.
-4. Save the connection, select **Live browser**, and launch your mission.
-
-> **Note:** API keys stay in your server environment (`.env`), never in browser forms or SQLite. External AI provider usage is billed directly by your provider, or you can use **Local Ollama** (`http://127.0.0.1:11434/v1`) with a local model at no external API cost.
+Open **`http://127.0.0.1:8765`** in your browser and click **Start demo**.
+- macOS users can also double-click `Tabvento.command`.
+- Use `uv run tabvento --port 8766` if port `8765` is in use.
+- **Simulated Demo Mode is 100% free**, does not visit live websites, call paid AI APIs, or require credentials.
 
 ---
 
-## 3. Core Capabilities
+## 📸 Interface & Workflow Gallery
 
-| Capability | Description |
+<p align="center">
+  <img src="images/01-inicio.png" width="48%" alt="Tabvento Workspace Home">
+  <img src="images/02-escribe-tu-mision.png" width="48%" alt="Mission Composer">
+</p>
+<p align="center">
+  <img src="images/03-resultado-demo.png" width="48%" alt="Simulated Demo Result Dossier">
+  <img src="images/05-conexiones.png" width="48%" alt="Provider & Solana Connections">
+</p>
+<p align="center">
+  <img src="images/06-example-library-desktop.png" width="98%" alt="24 Mission Example Catalog">
+</p>
+
+---
+
+## 💎 Solana Web3 Gate (Live Browser Mode Activation)
+
+**Simulated Demo Mode (`mode: "demo"`) is completely free for evaluation.** To unlock **Live Browser Mode (`mode: "live"`)** with a real local Chromium browser and your configured AI model provider:
+
+| Parameter | Specification |
 |---|---|
-| **Mission Workspace** | Compose a task, track real-time execution steps, and export or copy results. |
-| **Solana Web3 Gate** | On-chain Solana Mainnet verification (`>= $88 USD`, no maximum limit) to unlock live browser automation. |
-| **Direct Model Providers** | Connect OpenAI, Anthropic, Google Gemini, any OpenAI-compatible endpoint, or Local Ollama. |
-| **Local Chromium Execution** | Run live missions in a local Chromium browser on your machine. |
-| **Persistent SQLite History** | Store mission records, connection settings, and Solana verification status locally. |
-| **English & Spanish UI** | Default English (`EN`) interface with one-click toggle to Spanish (`ES`). |
+| **Official Solana Wallet** | `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm` |
+| **Minimum Contribution** | **$88.00 USD** (in native **SOL** or **USDC** on Solana Mainnet) |
+| **Maximum Limit** | **No maximum limit** (contributions $\ge \$88\text{ USD}$ unlock permanent access) |
+| **Verification Method** | Direct on-chain RPC lookup via Base58 transaction signature |
+| **Persistence** | Unlocked permanently in local SQLite database (`tabvento.sqlite`) |
+
+### How to Activate:
+1. Transfer $\ge \$88\text{ USD}$ on Solana Mainnet to `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm` (or use the **Open in Solana Pay ↗** button in the dashboard).
+2. Navigate to **Connections** (`http://127.0.0.1:8765#conexiones`).
+3. Paste your Base58 transaction signature and click **Verify Solana contribution**.
+4. Tabvento confirms the transaction on-chain and unlocks Live Browser Mode permanently.
 
 ---
 
-## 4. Architecture
+## 🤖 Supported AI Model Providers
+
+Configure your model in local environment variables (`.env`). API keys are never transmitted to the browser or stored in SQLite:
+
+- **OpenAI:** `gpt-4o`, `gpt-4o-mini`, `o1`, `o3-mini` (`OPENAI_API_KEY`)
+- **Anthropic Claude:** `claude-3-7-sonnet`, `claude-3-5-haiku` (`ANTHROPIC_API_KEY`)
+- **Google Gemini:** `gemini-2.0-flash`, `gemini-1.5-pro` (`GOOGLE_API_KEY`)
+- **Local Ollama:** `llama3.2`, `qwen2.5`, `mistral`, `deepseek-r1` via `http://127.0.0.1:11434/v1` (100% private, 0 external API cost)
+- **OpenAI-Compatible Custom:** vLLM, Together, Groq, DeepSeek, OpenRouter (`TABVENTO_COMPATIBLE_API_KEY`)
+
+---
+
+## 📚 24 Production Mission Presets
+
+Tabvento includes 24 built-in mission presets engineered for Small & Medium Businesses, local service providers, marketing agencies, and operations:
+
+| Category | Count | Example Scenarios |
+|---|:---:|---|
+| **Market Research** | 4 | Competitor pricing audits, industry news digest, tech stack detection |
+| **E-Commerce** | 4 | Stock inventory monitoring, catalog price scraping, shipping policy analysis |
+| **Developer QA** | 4 | Broken link scans, responsive navigation audit, accessibility checks |
+| **Lead Generation** | 4 | Local business contact discovery, agency portfolio enrichment, directory search |
+| **Data Extraction** | 4 | Financial table parsing, structured event aggregation, PDF download automation |
+| **Workflow Automation** | 4 | Multi-step form completion, simulated tour, comparative checklist synthesis |
+
+---
+
+## 🏗️ Architecture
 
 ```mermaid
-flowchart LR
-    UI["Tabvento Dashboard · EN / ES"] --> API["Local Loopback HTTP API"]
-    API --> DB["Local SQLite History & Settings"]
-    API --> DEMO["Simulated Demo Runner (Free)"]
-    API --> SOL["Solana On-Chain Verifier ($88+ USD)"]
-    SOL --> ENGINE["Local Automation Runner"]
-    ENGINE --> MODEL["Direct AI Model Provider / Ollama"]
-    ENGINE --> BROWSER["Local Chromium Browser"]
+flowchart TD
+    subgraph UI ["User Interface Layer"]
+        DASH["Local Web Dashboard · EN / ES"]
+        SHOWCASE["GitHub Pages Showcase (site/)"]
+    end
+
+    subgraph SERVER ["Local Loopback Server (127.0.0.1:8765)"]
+        API["REST API & Security Gate"]
+        STORE[("Thread-Isolated SQLite Store")]
+    end
+
+    subgraph DISPATCH ["Execution Dispatcher"]
+        DEMO["Simulated Demo Engine (Free Sandbox)"]
+        SOL["Solana On-Chain Gate (≥ $88 USD)"]
+    end
+
+    subgraph ENGINE ["Automation Engine"]
+        BROWSER_USE["browser_use Agent Orchestrator"]
+        CDP["Chrome DevTools Protocol (CDP)"]
+        CHROME["Local Chromium Browser"]
+        LLM["AI Model Adapter (OpenAI / Claude / Gemini / Ollama)"]
+    end
+
+    DASH -->|HTTP / JSON| API
+    SHOWCASE -.->|Static Simulation| DASH
+    API --> STORE
+    API --> DEMO
+    API --> SOL
+    SOL -->|Verified Live| BROWSER_USE
+    BROWSER_USE --> LLM
+    BROWSER_USE --> CDP
+    CDP --> CHROME
 ```
 
 ---
 
-## 5. Security & Execution Boundaries
+## 🔒 Security & Privacy Boundaries
 
-- **Loopback Protection:** The HTTP server binds to `127.0.0.1` and enforces strict `Host`, `Origin`, `Sec-Fetch-Site`, and `Content-Security-Policy` checks against cross-origin and DNS-rebinding requests.
-- **User Permissions:** Live missions execute Python with your local user permissions, without a sandbox. Run only trusted tasks and review the [security policy](.github/SECURITY.md).
-- **Cancellation:** Canceling an active mission stops local execution; it does not reverse actions already performed on external websites.
+- **Loopback Enforcement:** Binds strictly to `127.0.0.1`, enforcing strict `Host`, `Origin`, and `Content-Security-Policy` headers to block cross-origin attacks and DNS rebinding.
+- **Zero Cloud Leaks:** Your browsing sessions, cookies, user profiles, and extracted data never leave your local machine.
+- **Key Isolation:** API keys remain strictly in server environment variables (`.env`).
+- **Cancellation Guarantee:** Stopping an active mission aborts local execution immediately.
 
 ---
 
-## 6. Development & Quality Checks
+## 🧪 Developer Quality Checks
+
+Run the automated verification suite before submitting pull requests:
 
 ```bash
-uv sync --locked --all-extras --dev
-uv run pytest tests/ci tests/test_tabvento.py -m "not chrome"
-npm ci --prefix tests/frontend
+# 1. Run Tabvento backend pytest suite (25 tests)
+uv run pytest tests/test_tabvento.py -m "not chrome"
+
+# 2. Run frontend unit tests (9 tests)
 npm test --prefix tests/frontend
+
+# 3. Validate GitHub Pages showcase & assets
+node scripts/validate_pages.mjs
+
+# 4. Check formatting and linting
 uv run ruff check --no-fix
+
+# 5. Check static type typing
 uv run pyright
+
+# 6. Verify packaging build
 uv build
 ```
 
-All tests use mocked models and simulated RPC responses without calling paid AI providers or external networks.
-
 ---
 
-## 7. Licensing
+## 📄 License & Governance
 
-**Copyright © 2026 Tabvento.** Newly offered Tabvento-owned code is source-available under the custom commercial terms in [LICENSE](LICENSE), not the MIT license. Downloading and evaluating Simulated Demo Mode is free. Official Live Browser Mode activation requires a minimum payment of **$88 USD**; additional support is optional, with no maximum payment.
-
-- **Simulated Demo Mode:** Free for local evaluation.
-- **Live Browser Mode:** Unlocked via verified Solana activation payment (minimum **$88 USD** in SOL or USDC, no maximum limit) to `3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm`.
-- Previously granted licenses and existing permanent local activations remain governed by their original terms; this transition does not impose retroactive fees or renewal charges.
-- Upstream engine code and other third-party components retain their own licenses, including MIT and SIL OFL. See [third-party notices](THIRD_PARTY_NOTICES.md) and [upstream provenance](docs/upstream-browser-use.md).
-- The [commercial terms](LICENSE) apply to Tabvento-owned material only. A payment condition does not remove independent rights in MIT-licensed code. See the [commercial plan](docs/commercial-plan.md) for the activation scope.
+- **Copyright © 2026 Tabvento.** Tabvento-owned core code is source-available under the terms in [LICENSE](LICENSE).
+- Upstream engine components and bundled font assets retain their respective MIT and SIL Open Font licenses. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+- Community Guidelines: [Contributing](CONTRIBUTING.md) · [Code of Conduct](CODE_OF_CONDUCT.md) · [Security Policy](SECURITY.md) · [Changelog](CHANGELOG.md).

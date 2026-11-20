@@ -1,1 +1,8 @@
-blank_issues_enabled: true
+blank_issues_enabled: false
+contact_links:
+  - name: Security Vulnerabilities
+    url: https://github.com/tabvento/tabvento/security/policy
+    about: Please report security vulnerabilities responsibly as described in our security policy.
+  - name: Solana On-Chain Verification
+    url: https://solscan.io/account/3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm
+    about: Verify on-chain activation transactions for Live Browser Mode.

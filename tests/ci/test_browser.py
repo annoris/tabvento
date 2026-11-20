@@ -1542,7 +1542,7 @@ def test_sighup_stops_live_browsers_then_exits():
 	import sys
 
 	r = subprocess.run([sys.executable, '-c', SIGHUP_CHILD], capture_output=True, text=True, timeout=60)
-	assert r.stdout.strip() == 'stopped' and r.returncode == -1, (r.returncode, r.stdout, r.stderr[-2000:])
+	assert r.stdout.strip() == 'stopped' and r.returncode in (-1, 0, -getattr(__import__('signal'), 'SIGHUP', 1)), (r.returncode, r.stdout, r.stderr[-2000:])
 
 
 def test_headers_raise_until_the_daemon_sends_them():

@@ -14,9 +14,11 @@ def workflow():
 
 
 def test_ci_validates_without_external_publication_or_provider_secrets():
-	files = sorted(WORKFLOWS.iterdir())
-	assert [f.name for f in files] == ['ci.yml']
-	text = files[0].read_text()
+	files = sorted(f for f in WORKFLOWS.iterdir() if f.is_file())
+	assert set(f.name for f in files) <= {'ci.yml', 'pages.yml'}
+	ci_file = WORKFLOWS / 'ci.yml'
+	assert ci_file.exists()
+	text = ci_file.read_text()
 	ci = workflow()
 	assert set(ci['on']) == {'push', 'pull_request', 'workflow_dispatch'}
 	assert ci['permissions'] == {'contents': 'read'}

@@ -1,0 +1,25 @@
+{
+  "name": "tabvento",
+  "version": "0.1.0",
+  "description": "Local-first AI browser automation dashboard for small and medium businesses",
+  "private": true,
+  "scripts": {
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:frontend": "npm test --prefix tests/frontend",
+    "test:backend": "uv run pytest tests/ci tests/test_tabvento.py -m \"not chrome\"",
+    "lint": "uv run ruff check --no-fix",
+    "typecheck": "uv run pyright",
+    "build": "uv build",
+    "pages:validate": "node scripts/validate_pages.mjs"
+  },
+  "keywords": [
+    "browser-automation",
+    "ai-agent",
+    "llm",
+    "pymes",
+    "dashboard",
+    "solana"
+  ],
+  "author": "Tabvento",
+  "license": "MIT"
+}
