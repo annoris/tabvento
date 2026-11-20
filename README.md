@@ -9,8 +9,8 @@
 </p>
 
 <p align="center">
-  <a href="https://annoris.github.io/AI-tabvento/"><img src="https://img.shields.io/badge/Live_Showcase-GitHub_Pages-6366f1?style=for-the-badge&logo=githubpages&logoColor=white" alt="Live GitHub Pages Showcase"></a>
-  <a href="https://github.com/annoris/AI-tabvento/actions/workflows/ci.yml"><img src="https://img.shields.io/badge/CI-Passing-10b981?style=for-the-badge&logo=githubactions&logoColor=white" alt="CI Status"></a>
+  <a href="https://annoris.github.io/tabvento/"><img src="https://img.shields.io/badge/Live_Showcase-GitHub_Pages-6366f1?style=for-the-badge&logo=githubpages&logoColor=white" alt="Live GitHub Pages Showcase"></a>
+  <a href="https://github.com/annoris/tabvento/actions/workflows/ci.yml"><img src="https://img.shields.io/badge/CI-Passing-10b981?style=for-the-badge&logo=githubactions&logoColor=white" alt="CI Status"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Source--Available-f59e0b?style=for-the-badge" alt="License"></a>
   <a href="https://docs.astral.sh/uv/"><img src="https://img.shields.io/badge/Package_Manager-uv-blueviolet?style=for-the-badge" alt="uv package manager"></a>
   <a href="#solana-web3-gate"><img src="https://img.shields.io/badge/Web3_Gate-Solana_Mainnet-14F195?style=for-the-badge&logo=solana&logoColor=black" alt="Solana Web3 Gate"></a>
@@ -22,7 +22,7 @@
 
 Experience Tabvento directly in your browser without installing anything:
 
-👉 **[Launch Interactive GitHub Pages Showcase (https://annoris.github.io/AI-tabvento/)](https://annoris.github.io/AI-tabvento/)**
+👉 **[Launch Interactive GitHub Pages Showcase (https://annoris.github.io/tabvento/)](https://annoris.github.io/tabvento/)**
 
 - **Simulated Mission Runner:** Watch step-by-step DOM interactions, telemetry HUD, and synthetic token counters in real-time.
 - **24 Curated Presets Library:** Searchable and filterable business missions for Market Research, E-Commerce, Developer QA, Lead Gen, and Data Extraction.
@@ -37,8 +37,8 @@ You only need **Python 3.11+** and **[uv](https://docs.astral.sh/uv/)**.
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/annoris/AI-tabvento.git
-cd AI-tabvento
+git clone https://github.com/annoris/tabvento.git
+cd tabvento
 
 # 2. Synchronize environment with locked dependencies
 uv sync --locked --all-extras
