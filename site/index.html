@@ -1,500 +1,787 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Tabvento — Autonomous AI Browser Automation Dashboard</title>
-	<meta name="description" content="Local-first AI browser automation dashboard for small and medium businesses. Zero cloud locks, native multi-provider LLM integration, and bilingual EN/ES workflow.">
-	<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
-	<link rel="stylesheet" href="assets/css/fonts.css">
-	<link rel="stylesheet" href="assets/css/main.css">
-</head>
-<body>
-	<!-- Sticky Header / Navigation -->
-	<header class="site-header">
-		<div class="nav-container">
-			<a href="#hero" class="brand-link">
-				<img src="assets/img/mark.svg" alt="Tabvento Mark" width="32" height="32" class="brand-logo">
-				<span class="brand-title">Tabvento</span>
-				<span class="brand-badge">v0.1.0</span>
-			</a>
-			<nav class="nav-menu">
-				<a href="#simulator" class="nav-item">Mission Runner</a>
-				<a href="#examples" class="nav-item">24 Presets</a>
-				<a href="#solana-gate" class="nav-item">Solana Gate</a>
-				<a href="#providers" class="nav-item">AI Providers</a>
-				<a href="#architecture" class="nav-item">Architecture</a>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta name="theme-color" content="#10140e" />
+		<meta
+			name="description"
+			content="Tabvento: a mission desk to automate your browser with artificial intelligence."
+		/>
+		<title>Tabvento — Give your browser a mission</title>
+		<link rel="icon" type="image/svg+xml" href="./mark.svg" />
+		<link rel="stylesheet" href="./styles.css" />
+	</head>
+	<body>
+		<a class="skip-link" href="#main" data-i18n="skipLink">Skip to content</a>
+		<aside
+			class="sidebar"
+			aria-label="Main navigation"
+			data-i18n-aria-label="sidebar.ariaLabel"
+		>
+			<a
+				href="#inicio"
+				class="brand"
+				aria-label="Tabvento home"
+				data-i18n-aria-label="brand.ariaLabel"
+				><img src="./mark.svg" alt="" width="35" height="35" /><span
+					>tabvento<span class="brand-dot">.</span></span
+				></a
+			>
+			<div class="workspace-label" data-i18n="sidebar.workspace">
+				YOUR WORKSPACE
+			</div>
+			<nav>
+				<a
+					href="#inicio"
+					data-view="inicio"
+					class="nav-link active"
+					data-i18n="nav.inicio"
+					><span data-icon="grid"></span>Overview<span class="nav-key"
+						>01</span
+					></a
+				><a
+					href="#misiones"
+					data-view="misiones"
+					class="nav-link"
+					data-i18n="nav.misiones"
+					><span data-icon="layers"></span>Missions<span
+						class="count"
+						id="mission-count"
+						>0</span
+					></a
+				><a
+					href="#conexiones"
+					data-view="conexiones"
+					class="nav-link"
+					data-i18n="nav.conexiones"
+					><span data-icon="sliders"></span>Connections</a
+				>
 			</nav>
-			<div class="nav-actions">
-				<div class="lang-switch-wrap">
-					<button type="button" class="lang-btn active" data-lang="en">EN</button>
-					<span class="lang-divider">/</span>
-					<button type="button" class="lang-btn" data-lang="es">ES</button>
-				</div>
-				<span id="nav-gate-badge" class="badge-gate badge-demo">Simulated Demo</span>
-				<a href="https://github.com/annoris/tabvento" class="btn btn-secondary btn-sm" target="_blank" rel="noopener noreferrer">
-					GitHub ↗
-				</a>
-			</div>
-		</div>
-	</header>
-
-	<main class="site-main">
-		<!-- 1. Hero Section -->
-		<section id="hero" class="hero-section">
-			<div class="hero-inner">
-				<div class="hero-tag-wrap">
-					<span class="badge-accent">Local-First AI Browser Automation</span>
-					<span class="badge-subtle">Bilingual EN / ES Native</span>
-				</div>
-				<h1 class="hero-headline">
-					Autonomous AI Browser Automation for <span class="text-gradient">Modern Business</span>
-				</h1>
-				<p class="hero-description">
-					Run real local Chrome automation or zero-cost simulated sandbox missions. Designed for SMEs, agile agencies, and enterprise automation with zero cloud locks and strict data privacy.
+			<div class="sidebar-note">
+				<span class="tiny-cross">✳</span>
+				<p data-i18n-html="sidebar.noteTitle">
+					Fewer tabs.<br />More possibilities.
 				</p>
-				<div class="hero-cta-group">
-					<a href="#simulator" class="btn btn-primary btn-lg" id="hero-btn-demo">Run Interactive Simulator</a>
-					<a href="#examples" class="btn btn-secondary btn-lg">Explore 24 Presets</a>
-					<div class="cli-command-box" title="Click to copy CLI command">
-						<code id="cli-text">uv run tabvento</code>
-						<button type="button" class="btn-copy-icon" id="hero-btn-copy-cli" aria-label="Copy CLI command">📋</button>
+				<span data-i18n="sidebar.noteSubtitle"
+					>Your next idea starts here.</span
+				><svg viewBox="0 0 170 52" aria-hidden="true">
+					<path
+						d="M0 32C45 32 35 5 75 17S119 57 170 5M0 43C45 43 35 16 75 28S119 68 170 16"
+					/>
+				</svg>
+			</div>
+			<div class="sidebar-bottom">
+				<a
+					href="#guia"
+					class="nav-link"
+					data-view="guia"
+					data-i18n="nav.guia"
+					><span data-icon="book"></span>Getting started<span>↗</span></a
+				>
+				<div class="local-profile">
+					<div class="avatar">T</div>
+					<div>
+						<strong data-i18n="sidebar.localTitle">Local workspace</strong
+						><span data-i18n="sidebar.localSubtitle">On your machine · v0.1</span>
 					</div>
-				</div>
-
-				<!-- Executive KPI Metric Cards -->
-				<div class="kpi-grid">
-					<div class="kpi-card">
-						<div class="kpi-value text-accent">24</div>
-						<div class="kpi-label">Mission Presets</div>
-						<div class="kpi-sub">Research, E-Com, QA, Leads</div>
-					</div>
-					<div class="kpi-card">
-						<div class="kpi-value text-primary">0%</div>
-						<div class="kpi-label">Cloud Leaks</div>
-						<div class="kpi-sub">Loopback SQLite & Local Chrome</div>
-					</div>
-					<div class="kpi-card">
-						<div class="kpi-value text-solana">≥ $88</div>
-						<div class="kpi-label">Solana Web3 Gate</div>
-						<div class="kpi-sub">On-chain unlock · No max limit</div>
-					</div>
-					<div class="kpi-card">
-						<div class="kpi-value text-warning">5+</div>
-						<div class="kpi-label">Model Providers</div>
-						<div class="kpi-sub">OpenAI, Claude, Gemini, Ollama</div>
-					</div>
+					<span class="local-dot"></span>
 				</div>
 			</div>
-		</section>
-
-		<!-- 2. Interactive Simulator Section -->
-		<section id="simulator" class="section-container">
-			<div class="section-header">
-				<div class="section-subtitle">Interactive Mission Simulator</div>
-				<h2 class="section-title">Experience Browser Orchestration in Real-Time</h2>
-				<p class="section-lead">
-					Test Tabvento's 4-phase deterministic execution pipeline directly in your browser. Choose a preset or write a custom goal.
-				</p>
-			</div>
-
-			<div class="simulator-layout">
-				<!-- Left Panel: Composer & Mode Controls -->
-				<div class="composer-card">
-					<div class="composer-header">
-						<h3 class="composer-title">Compose Mission Draft</h3>
-						<div class="mode-tabs">
-							<button type="button" id="mode-tab-demo" class="mode-tab active">Simulated Demo (Free)</button>
-							<button type="button" id="mode-tab-live" class="mode-tab">Live Browser (Web3)</button>
+		</aside>
+		<div class="app-shell">
+			<header class="topbar">
+				<button
+					id="menu-toggle"
+					class="icon-button mobile-only"
+					aria-label="Open menu"
+					data-i18n-aria-label="menu.open"
+					aria-expanded="false"
+				>
+					<span data-icon="menu"></span>
+				</button>
+				<div class="breadcrumb" data-i18n="topbar.workspace">
+					Workspace <span>/</span>
+					<strong id="breadcrumb-title" data-i18n="breadcrumb.inicio"
+						>Overview</strong
+					>
+				</div>
+				<div class="top-actions">
+					<span
+						class="connection-badge"
+						id="server-badge"
+						data-i18n="server.connecting"
+						><i></i>Connecting</span
+					><button
+						class="lang-toggle"
+						id="lang-toggle"
+						type="button"
+						aria-label="Switch language to Spanish"
+						data-i18n-aria-label="lang.switchToEs"
+						data-lang="en"
+					>
+						<span class="lang-opt" data-lang-opt="es">ES</span
+						><span class="lang-sep">/</span
+						><span class="lang-opt active" data-lang-opt="en">EN</span></button
+					><button
+						class="icon-button"
+						id="motion-toggle"
+						aria-label="Pause animations"
+						data-i18n-aria-label="motion.pause"
+						aria-pressed="false"
+					>
+						<span data-icon="sparkles"></span></button
+					><a class="source-link" href="#guia"
+						><span data-icon="book"></span
+						><span data-i18n="topbar.guide">Tabvento Guide</span
+						><span>↗</span></a
+					>
+				</div>
+			</header>
+			<main id="main" tabindex="-1">
+				<section id="view-inicio" class="view">
+					<div class="page-intro">
+						<span class="eyebrow" data-i18n="hero.eyebrow"
+							><span class="mini-star">✳</span> UN NUEVO AIRE PARA TU
+							NAVEGADOR</span
+						><span class="edition" data-i18n="hero.edition"
+							>TABVENTO / WORKSPACE 001</span
+						>
+					</div>
+					<section class="hero" aria-labelledby="hero-title">
+						<div class="hero-copy">
+							<div class="hero-kicker" data-i18n="hero.kicker">
+								<span></span> Tú pones la idea. El agente, el recorrido.
+							</div>
+							<h1 id="hero-title" data-i18n-html="hero.title">
+								La web se mueve.<br /><span>Ahora, a tu favor.</span>
+							</h1>
+							<p data-i18n-html="hero.subtitle">
+								Convierte una instrucción en un recorrido.<br />Investiga,
+								compara y reúne lo que importa,<br />desde una sola mesa de
+								misiones.
+							</p>
+							<div class="hero-actions">
+								<button
+									class="button primary"
+									id="hero-new"
+									data-i18n="hero.newMission"
+								>
+									Crear una misión <span data-icon="arrow"></span></button
+								><button
+									class="button text-button"
+									id="hero-demo"
+									data-i18n="hero.demo"
+								>
+									<span class="play-icon">▶</span> Verlo en acción
+								</button>
+							</div>
+							<div class="hero-footnote" data-i18n="hero.footnote">
+								<span class="mini-path">↳</span> Navegador local. Demo gratis. Tú al mando.
+							</div>
 						</div>
+						<div class="hero-art" aria-hidden="true">
+							<div class="art-grid"></div>
+							<div class="orbit orbit-one"></div>
+							<div class="orbit orbit-two"></div>
+							<svg class="wind-path" viewBox="0 0 560 390">
+								<path
+									class="wind-shadow"
+									d="M-30 295C80 295 70 95 195 103S290 340 401 244S425 46 600 75"
+								/>
+								<path
+									class="wind-line"
+									d="M-30 295C80 295 70 95 195 103S290 340 401 244S425 46 600 75"
+								/>
+								<path
+									class="wind-thread"
+									d="M-30 310C80 310 70 110 195 118S290 355 401 259S425 61 600 90"
+								/>
+							</svg>
+							<div class="floating-tab tab-back">
+								<div class="art-browser-bar">
+									<i></i><i></i><i></i
+									><span data-i18n="art.explore">explorar</span>
+								</div>
+								<div class="skeleton-line wide"></div>
+								<div class="skeleton-line"></div>
+								<div class="art-thumbnails"><i></i><i></i><i></i></div>
+							</div>
+							<div class="floating-tab tab-front">
+								<div class="art-browser-bar">
+									<i></i><i></i><i></i
+									><span data-i18n="art.ideaInMotion"
+										>una idea, en movimiento</span
+									><b>↗</b>
+								</div>
+								<div class="mini-search" data-i18n="art.search">
+									<span>⌕</span> Encuentra nuevas posibilidades <b>↵</b>
+								</div>
+								<div class="art-result">
+									<div class="result-symbol">↗</div>
+									<div>
+										<span data-i18n="art.goalFound">OBJETIVO ENCONTRADO</span
+										><strong data-i18n="art.tabsToAnswers"
+											>De pestañas a respuestas.</strong
+										>
+										<div class="skeleton-line"></div>
+									</div>
+								</div>
+								<div class="art-progress">
+									<span></span><span></span><span></span><i>03 / 03</i>
+								</div>
+							</div>
+							<div class="floating-chip chip-top" data-i18n="art.chipTop">
+								<span>✳</span> Sigue la corriente
+							</div>
+							<div class="floating-chip chip-bottom" data-i18n="art.chipBottom">
+								<span class="check-circle">✓</span> Una misión. Todo conectado.
+							</div>
+							<div class="art-coordinate" data-i18n="art.coordinate">
+								40° 43′ N &nbsp; / &nbsp; NUEVOS HORIZONTES
+							</div>
+						</div>
+					</section>
+					<section class="composer-section" aria-labelledby="composer-title">
+						<div class="section-heading">
+							<div>
+								<span class="section-index">01 /</span>
+								<h2 id="composer-title" data-i18n="composer.title">
+									¿Qué quieres poner en marcha?
+								</h2>
+							</div>
+							<span class="small-label" data-i18n="composer.badge"
+								>EMPIEZA CON UNA IDEA</span
+							>
+						</div>
+						<form id="mission-form" class="composer">
+							<label
+								class="sr-only"
+								for="task-input"
+								data-i18n="composer.taskLabel"
+								>Describe tu misión</label
+							><textarea
+								id="task-input"
+								maxlength="4000"
+								rows="2"
+								placeholder="Encuentra, compara, investiga… escribe tu próxima misión."
+								data-i18n-placeholder="composer.placeholder"
+								required
+							></textarea>
+							<div class="composer-bottom">
+								<div class="composer-options">
+									<label class="mode-select"
+										><span data-icon="orbit"></span
+										><select
+											id="mode-select"
+											aria-label="Modo de ejecución"
+											data-i18n-aria-label="composer.modeAria"
+										>
+											<option value="demo" data-i18n="composer.modeDemo">
+												Demo simulada
+											</option>
+											<option value="live" data-i18n="composer.modeLive">
+												Navegador real
+											</option></select
+										><span>⌄</span></label
+									><span
+										class="composer-hint"
+										id="mode-hint"
+										data-i18n="composer.hintDemo"
+										>Explora el recorrido sin usar claves ni IA.</span
+									>
+								</div>
+								<button
+									class="button primary"
+									id="submit-mission"
+									type="submit"
+									data-i18n="composer.submitDemo"
+								>
+									Iniciar demo <span data-icon="arrow"></span>
+								</button>
+							</div>
+						</form>
+						<details class="example-library" id="example-library">
+							<summary data-i18n="examples.title">Explore 24 example missions</summary>
+							<p id="examples-description" data-i18n="examples.description">Choose an example to fill your draft. Nothing starts until you submit it.</p>
+							<p class="example-mode-note" data-i18n="examples.modes">Demo shows the same four generic simulated steps for every goal: no browsing or AI. Live needs verified activation, a configured provider, and a local browser; provider charges may apply.</p>
+							<div id="example-grid" class="example-grid" role="group" aria-describedby="examples-description"></div>
+						</details>
+						<div class="suggestions">
+							<span data-i18n="suggestions.label">O prueba con</span
+							><button
+								type="button"
+								data-prompt="Investigar opciones para un espacio de trabajo creativo"
+								data-i18n="suggestions.idea"
+								data-i18n-prompt="suggestions.ideaPrompt"
+							>
+								↗ Investigar una idea</button
+							><button
+								type="button"
+								data-prompt="Comparar tres herramientas para organizar proyectos"
+								data-i18n="suggestions.compare"
+								data-i18n-prompt="suggestions.comparePrompt"
+							>
+								⇄ Comparar opciones</button
+							><button
+								type="button"
+								data-prompt="Recopilar recursos para aprender una habilidad nueva"
+								data-i18n="suggestions.resources"
+								data-i18n-prompt="suggestions.resourcesPrompt"
+							>
+								⊞ Reunir recursos
+							</button>
+						</div>
+					</section>
+					<section class="recent-section">
+						<div class="section-heading">
+							<div>
+								<span class="section-index">02 /</span>
+								<h2 data-i18n="recent.title">Tus últimos recorridos</h2>
+							</div>
+							<a
+								href="#misiones"
+								class="inline-link"
+								data-i18n="recent.viewAll"
+								>Ver todas las misiones <span>↗</span></a
+							>
+						</div>
+						<div id="recent-missions"></div>
+					</section>
+					<section class="principles">
+						<div>
+							<span data-icon="orbit"></span
+							><strong data-i18n="principles.oneTitle"
+								>Una idea, un recorrido</strong
+							>
+							<p data-i18n="principles.oneBody">
+								Del objetivo al resultado, con cada paso a la vista.
+							</p>
+						</div>
+						<div>
+							<span data-icon="shield"></span
+							><strong data-i18n="principles.twoTitle"
+								>Tu espacio, tus conexiones</strong
+							>
+							<p data-i18n="principles.twoBody">
+								Historial local y claves en el entorno de tu equipo.
+							</p>
+						</div>
+						<div>
+							<span data-icon="code"></span
+							><strong data-i18n="principles.threeTitle"
+								>Abierto a lo que viene</strong
+							>
+							<p data-i18n="principles.threeBody">
+								Una interfaz propia sobre un motor de código abierto.
+							</p>
+						</div>
+					</section>
+				</section>
+				<section id="view-misiones" class="view" hidden>
+					<div class="view-title">
+						<div>
+							<span class="eyebrow" data-i18n="missions.eyebrow"
+								>TU HISTORIAL LOCAL</span
+							>
+							<h1 data-i18n-html="missions.titleHtml">
+								Todos tus recorridos<span>.</span>
+							</h1>
+							<p data-i18n="missions.subtitle">
+								Una idea puede abrir muchas puertas. Aquí quedan sus pasos.
+							</p>
+						</div>
+						<a
+							href="#inicio"
+							class="button primary"
+							data-i18n="missions.new"
+							>Nueva misión <span data-icon="plus"></span
+						></a>
 					</div>
-					<div id="mode-meta-tip" class="mode-tip-box">
-						💡 <strong>Simulated Demo Mode:</strong> 100% keyless sandbox testing. Simulates DOM inspection, synthetic token accounting, and generates structured reports.
-					</div>
-
-					<div class="form-group">
-						<label for="preset-selector" class="form-label">Select from 24 curated business presets:</label>
-						<select id="preset-selector" class="form-select">
-							<option value="">-- Choose an existing preset --</option>
+					<div class="history-toolbar">
+						<label class="search-field"
+							><span data-icon="search"></span
+							><input
+								id="history-search"
+								placeholder="Buscar una misión…"
+								aria-label="Buscar misiones"
+								data-i18n-placeholder="missions.searchPlaceholder"
+								data-i18n-aria-label="missions.searchAria" /></label
+						><select
+							id="history-filter"
+							aria-label="Filtrar por estado"
+							data-i18n-aria-label="missions.filterAria"
+						>
+							<option value="all" data-i18n="missions.filterAll">
+								Todos los estados
+							</option>
+							<option value="running" data-i18n="missions.filterRunning">
+								En marcha
+							</option>
+							<option value="completed" data-i18n="missions.filterCompleted">
+								Completadas
+							</option>
+							<option value="failed" data-i18n="missions.filterFailed">
+								Con errores
+							</option>
+							<option value="cancelled" data-i18n="missions.filterCancelled">
+								Canceladas
+							</option>
 						</select>
 					</div>
-
-					<div class="form-group">
-						<label for="mission-prompt-input" class="form-label">Mission Objective / Prompt:</label>
-						<textarea id="mission-prompt-input" class="form-textarea" rows="4" placeholder="Describe the browser objective you want Tabvento to accomplish..."></textarea>
-					</div>
-
-					<div class="composer-actions">
-						<button type="button" id="btn-run-mission" class="btn btn-primary btn-block">▶ Start Mission</button>
-						<div class="btn-group-dual">
-							<button type="button" id="btn-pause-mission" class="btn btn-secondary btn-sm" disabled>⏸ Pause</button>
-							<button type="button" id="btn-resume-mission" class="btn btn-secondary btn-sm" style="display:none;">▶ Resume</button>
-							<button type="button" id="btn-cancel-mission" class="btn btn-danger btn-sm" disabled>⏹ Stop</button>
-							<button type="button" id="btn-reset-mission" class="btn btn-secondary btn-sm">↺ Reset</button>
+					<div id="all-missions"></div>
+				</section>
+				<section id="view-conexiones" class="view" hidden>
+					<div class="view-title">
+						<div>
+							<span class="eyebrow" data-i18n="connections.eyebrow"
+								>EL MOTOR DE TUS IDEAS</span
+							>
+							<h1 data-i18n-html="connections.titleHtml">
+								Conecta posibilidades<span>.</span>
+							</h1>
+							<p data-i18n="connections.subtitle">
+								Elige tu modelo. El navegador se ejecuta en este equipo.
+							</p>
 						</div>
 					</div>
-				</div>
-
-				<!-- Right Panel: Virtual Viewport, HUD & Live Terminal -->
-				<div class="viewport-card">
-					<!-- Realtime HUD Telemetry -->
-					<div class="hud-bar">
-						<div class="hud-item">
-							<span class="hud-label">STATUS</span>
-							<span id="hud-status-pill" class="badge-status status-idle">
-								<span class="status-dot"></span>
-								<span id="hud-status-text">IDLE</span>
-							</span>
-						</div>
-						<div class="hud-item">
-							<span class="hud-label">STEP</span>
-							<span id="hud-step-val" class="hud-value">0 / 4</span>
-						</div>
-						<div class="hud-item">
-							<span class="hud-label">TIME</span>
-							<span id="hud-time-val" class="hud-value">0.0s</span>
-						</div>
-						<div class="hud-item">
-							<span class="hud-label">TOKENS</span>
-							<span id="hud-tokens-val" class="hud-value">0</span>
-						</div>
-						<div class="hud-item">
-							<span class="hud-label">DOM OPS</span>
-							<span id="hud-ops-val" class="hud-value">0</span>
-						</div>
-					</div>
-
-					<!-- Virtual Browser Stage -->
-					<div class="virtual-browser">
-						<div class="browser-chrome-bar">
-							<div class="traffic-lights">
-								<span class="light red"></span>
-								<span class="light yellow"></span>
-								<span class="light green"></span>
+					<div class="settings-grid">
+						<section class="settings-card">
+							<span class="card-number" data-i18n="connections.card1Number"
+								>01 / MODELO</span
+							>
+							<h2 data-i18n="connections.card1Title">
+								Tu inteligencia, a elección.
+							</h2>
+							<p data-i18n="connections.card1Body">
+								Elige tu proveedor y escribe el identificador exacto del modelo.
+								La conexión se guarda en este servidor local.
+							</p>
+							<p class="field-hint" data-i18n="commercial.ai">La IA se paga aparte: conecta tu propia clave API y paga el consumo directamente a tu proveedor. No incluye créditos de IA. Con Ollama puedes usar un modelo local compatible sin una API externa de pago.</p>
+							<form id="settings-form">
+								<label
+									for="provider-select"
+									data-i18n="connections.providerLabel"
+									>Proveedor</label
+								><select id="provider-select" required disabled>
+									<option value="" data-i18n="connections.loadingProviders">
+										Cargando proveedores…
+									</option></select
+								><label for="model-input" data-i18n="connections.modelLabel"
+									>Identificador exacto del modelo</label
+								><input
+									id="model-input"
+									required
+									maxlength="200"
+									autocomplete="off"
+									spellcheck="false"
+									placeholder="El nombre de tu modelo, sin modificar"
+									data-i18n-placeholder="connections.modelPlaceholder"
+								/>
+								<div id="base-url-field" hidden>
+									<label
+										for="base-url-input"
+										data-i18n="connections.baseUrlLabel"
+										>Dirección del servicio</label
+									><input
+										id="base-url-input"
+										type="url"
+										maxlength="2000"
+										autocomplete="off"
+										spellcheck="false"
+										placeholder="http://localhost:11434/v1"
+									/>
+									<p class="field-hint" data-i18n="connections.baseUrlHint">
+										URL del endpoint compatible. No incluyas claves, contraseñas
+										ni tokens en la dirección.
+									</p>
+								</div>
+								<p
+									class="field-hint"
+									id="provider-hint"
+									data-i18n="connections.providerHintDefault"
+								>
+									Las claves se configuran en .env o en el entorno del servidor;
+									nunca en este formulario.
+								</p>
+								<div class="settings-actions">
+									<button
+										id="save-connection"
+										type="submit"
+										class="button primary"
+										data-i18n="connections.save"
+									>
+										Guardar conexión <span data-icon="check"></span></button
+									><button
+										id="check-connection"
+										type="button"
+										class="button secondary"
+										disabled
+										data-i18n="connections.check"
+									>
+										Comprobar configuración
+									</button>
+								</div>
+								<p
+									id="saved-connection"
+									class="field-hint"
+									role="status"
+									data-i18n="connections.noneSaved"
+								>
+									Todavía no hay una conexión guardada.
+								</p>
+								<div id="connection-check" aria-live="polite"></div>
+							</form>
+						</section>
+						<section class="settings-card">
+							<span class="card-number" data-i18n="connections.card2Number"
+								>02 / CONEXIONES</span
+							>
+							<h2 data-i18n="connections.card2Title">Listo en tu equipo.</h2>
+							<div id="connection-list"></div>
+							<a
+								href="#guia"
+								class="inline-link"
+								data-i18n="connections.howToKeys"
+								>Cómo configurar las claves ↗</a
+							>
+						</section>
+						<section class="settings-card solana-card" id="solana-contribution-card">
+							<span class="card-number" data-i18n="solana.cardNumber"
+								>03 / SOLANA · DESBLOQUEAR MODO REAL</span
+							>
+							<h2 data-i18n="solana.cardTitle">
+								Contribución en Solana · Modo real
+							</h2>
+							<p data-i18n="solana.cardBody">
+								El modo Demo simulada es 100% gratuito. Para desbloquear las misiones en navegador real, realiza una contribución en la red Solana (mínimo $88 USD en SOL o USDC, sin límite máximo) y verifica la firma de tu transacción.
+							</p>
+							<div class="solana-wallet-box">
+								<div class="solana-wallet-row">
+									<span class="small-label" data-i18n="solana.walletLabel">CARTERA OFICIAL DE SOLANA</span>
+									<span class="status-pill" id="solana-min-badge" data-i18n="solana.minBadge">Mínimo: $88 USD · Sin límite máximo</span>
+								</div>
+								<code id="solana-wallet-address">3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm</code>
+								<div class="settings-actions">
+									<button
+										type="button"
+										class="button secondary"
+										id="copy-solana-wallet"
+										data-i18n="solana.copyWallet"
+									>
+										Copiar cartera
+									</button>
+									<a
+										id="solana-pay-link"
+										class="button secondary"
+										href="solana:3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm?label=Tabvento"
+										data-i18n="solana.payLink"
+									>
+										Abrir en Solana Pay ↗
+									</a>
+								</div>
+								<p class="field-hint">
+									<span data-i18n="solana.memoLabel">Código de referencia del equipo (Memo opcional):</span>
+									<strong id="solana-device-code">TV-LOCAL</strong>
+								</p>
 							</div>
-							<div class="browser-address-bar">
-								<span class="lock-icon">🔒</span>
-								<span id="browser-url-text">https://tabvento.local/mission</span>
+							<form id="solana-verify-form">
+								<label for="solana-signature-input" data-i18n="solana.signatureLabel"
+									>Firma de la transacción de Solana (Transaction Signature / Base58)</label
+								>
+								<input
+									id="solana-signature-input"
+									required
+									maxlength="120"
+									autocomplete="off"
+									spellcheck="false"
+									placeholder="Pega la firma Base58 de tu transacción en Solana (mín. $88 USD)…"
+									data-i18n-placeholder="solana.signaturePlaceholder"
+								/>
+								<div class="settings-actions">
+									<button
+										id="verify-solana-btn"
+										type="submit"
+										class="button primary"
+										data-i18n="solana.verifyButton"
+									>
+										Verificar contribución en Solana <span data-icon="check"></span>
+									</button>
+								</div>
+								<p
+									id="solana-verify-status"
+									class="field-hint"
+									role="status"
+									data-i18n="solana.statusPending"
+								>
+									Estado: Pendiente de verificación (Demo simulada disponible gratis).
+								</p>
+							</form>
+						</section>
+						<section class="settings-card privacy-card">
+							<span data-icon="shield"></span>
+							<div>
+								<h2 data-i18n="connections.privacyTitle">
+									Local desde el principio.
+								</h2>
+								<p data-i18n="connections.privacyBody">
+									Las claves no se guardan en el navegador. El historial se
+									guarda en SQLite en tu equipo. En modo real, el contenido
+									necesario se envía al proveedor del modelo. La telemetría del
+									motor está desactivada por defecto al iniciar Tabvento.
+								</p>
 							</div>
-							<div class="browser-actions-bar">
-								<span class="browser-opt">⚙</span>
-							</div>
-						</div>
-
-						<div id="viewport-content-box" class="viewport-stage">
-							<div class="viewport-overlay">
-								<h4 id="viewport-title">Tabvento Autonomous Browser Stage</h4>
-								<div id="viewport-body" class="viewport-text">Select a mission preset and click "Start Mission" to observe real-time DOM interaction and step transitions.</div>
-							</div>
-							<div id="virtual-cursor" class="virtual-mouse" style="display:none;"></div>
+						</section>
+					</div>
+				</section>
+				<section id="view-guia" class="view" hidden>
+					<div class="view-title">
+						<div>
+							<span class="eyebrow" data-i18n="guide.eyebrow"
+								>DE LA IDEA AL PRIMER RECORRIDO</span
+							>
+							<h1 data-i18n-html="guide.titleHtml">
+								Un poco de orientación<span>.</span>
+							</h1>
+							<p data-i18n="guide.subtitle">
+								Todo lo que necesitas para empezar, sin perder el rumbo.
+							</p>
 						</div>
 					</div>
-
-					<!-- Terminal Console Output -->
-					<div class="terminal-card">
-						<div class="terminal-header">
-							<span class="terminal-title">TERMINAL LOG OUTPUT</span>
-							<span class="terminal-pulse">LIVE</span>
-						</div>
-						<div id="terminal-log-view" class="terminal-log-view">
-							<div class="log-line log-system">[00:00:00] Tabvento Engine v0.1.0 initialized in loopback context.</div>
-							<div class="log-line log-info">[00:00:00] Ready for mission submission. SQLite persistence online.</div>
-						</div>
+					<div class="guide-grid">
+						<article class="guide-card" id="pro-offer" aria-labelledby="pro-title">
+							<h2 id="pro-title" data-i18n="commercial.title">Activación de pago en Solana · Desde US$88 (sin límite máximo)</h2>
+							<p data-i18n="commercial.terms">El modo Demo simulada es gratuito para explorar Tabvento. La activación oficial del modo real requiere un pago mínimo de $88 USD en SOL o USDC a la cartera oficial de Solana. El apoyo adicional es opcional, sin límite máximo.</p>
+							<p data-i18n="commercial.ai">La IA se paga aparte: conecta tu propia clave API y paga el consumo directamente a tu proveedor. No incluye créditos de IA. Con Ollama puedes usar un modelo local compatible sin una API externa de pago.</p>
+							<p class="field-hint" data-i18n="commercial.status">Cartera oficial de Solana: 3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm · Verifica tu firma directamente en Conexiones.</p>
+						</article>
+						<article class="guide-card">
+							<span class="card-number" data-i18n="guide.card1Number"
+								>01 / EXPLORA</span
+							>
+							<h2 data-i18n="guide.card1Title">Empieza sin configurar nada.</h2>
+							<p data-i18n-html="guide.card1Body">
+								En Vista general, escribe una misión y elige
+								<strong>Demo simulada</strong>. Verás un recorrido ilustrativo,
+								sin visitar sitios ni llamar a un modelo. Se guarda en tu
+								historial y puedes cancelarlo.
+							</p>
+							<a href="#inicio" class="inline-link" data-i18n="guide.card1Link"
+								>Probar la demo ↗</a
+							>
+						</article>
+						<article class="guide-card">
+							<span class="card-number" data-i18n="guide.card2Number"
+								>02 / CONECTA</span
+							>
+							<h2 data-i18n="guide.card2Title">Trae tu propio modelo.</h2>
+							<p data-i18n-html="guide.card2Body">
+								Configura la clave de tu proveedor en <code>.env</code> y
+								reinicia el servidor. Después elige el proveedor y guarda el
+								identificador exacto del modelo en Conexiones. Para Ollama,
+								configura la dirección de tu servicio local. “Comprobar
+								configuración” revisa los requisitos locales; no autentica
+								contra el proveedor.
+							</p>
+							<pre data-i18n="guide.card2Code">
+OPENAI_API_KEY=tu_clave
+# o ANTHROPIC_API_KEY / GOOGLE_API_KEY</pre
+							>
+							<a
+								href="#conexiones"
+								class="inline-link"
+								data-i18n="guide.card2Link"
+								>Configurar modelo ↗</a
+							>
+						</article>
+						<article class="guide-card">
+							<span class="card-number" data-i18n="guide.card3Number"
+								>03 / EJECUTA</span
+							>
+							<h2 data-i18n="guide.card3Title">Abre nuevas posibilidades.</h2>
+							<p data-i18n-html="guide.card3Body1">
+								Selecciona <strong>Navegador real</strong> y describe un
+								objetivo concreto. Necesitas Chrome, Chromium o Edge instalado.
+								Las llamadas al proveedor pueden tener coste.
+							</p>
+							<p data-i18n="guide.card3Body2">
+								El agente ejecuta Python con los permisos de tu usuario. Usa
+								tareas de confianza y un entorno aislado para contenido no
+								confiable.
+							</p>
+						</article>
+						<article class="guide-card">
+							<span class="card-number" data-i18n="guide.card4Number"
+								>04 / LICENCIAS Y DERECHOS</span
+							>
+							<h2 data-i18n="guide.card4Title">
+								Licencia oficial de Tabvento.
+							</h2>
+							<p data-i18n="guide.card4Body">
+								Copyright © 2026 Tabvento. Las nuevas contribuciones propias se ofrecen bajo LICENSE; se conservan las licencias de terceros y los derechos previamente concedidos. Demo gratis. Activación oficial del modo real: pago mínimo de $88 USD en Solana; apoyo adicional opcional, sin límite máximo. Consulta LICENSE y THIRD_PARTY_NOTICES.md.
+							</p>
+						</article>
 					</div>
-				</div>
-			</div>
-
-			<!-- Result Dossier Inspector -->
-			<div id="result-inspector" class="result-inspector-card" style="display:none;">
-				<div class="result-header">
-					<div class="result-title-wrap">
-						<span class="badge-success">MISSION COMPLETED</span>
-						<h3 class="result-title">Executive Mission Dossier</h3>
-					</div>
-					<div class="result-actions">
-						<button type="button" id="btn-copy-result" class="btn btn-secondary btn-sm">📋 Copy Report</button>
-						<button type="button" id="btn-download-json" class="btn btn-secondary btn-sm">💾 Export JSON</button>
-						<button type="button" id="btn-download-md" class="btn btn-secondary btn-sm">📄 Export Markdown</button>
-					</div>
-				</div>
-				<div class="result-tabs">
-					<button type="button" class="result-tab active" data-tab="summary">Executive Summary</button>
-					<button type="button" class="result-tab" data-tab="json">Structured JSON</button>
-					<button type="button" class="result-tab" data-tab="md">Markdown Dossier</button>
-				</div>
-				<div class="result-content-wrap">
-					<div id="result-tab-summary-content" class="result-pane active"></div>
-					<pre id="result-tab-json-content" class="result-pane code-pane" style="display:none;"></pre>
-					<pre id="result-tab-md-content" class="result-pane code-pane" style="display:none;"></pre>
-				</div>
-			</div>
-		</section>
-
-		<!-- 3. 24 Mission Presets Library Section -->
-		<section id="examples" class="section-container">
-			<div class="section-header">
-				<div class="section-subtitle">Comprehensive Mission Catalog</div>
-				<h2 class="section-title">24 Production Mission Examples</h2>
-				<p class="section-lead">
-					Pre-built automated workflows for small businesses, agencies, and enterprise operations. Click any mission to load it directly into the simulator.
-				</p>
-			</div>
-
-			<div class="library-controls">
-				<div class="category-pills">
-					<button type="button" class="cat-pill active" data-cat="all">All Presets (24)</button>
-					<button type="button" class="cat-pill" data-cat="research">Market Research</button>
-					<button type="button" class="cat-pill" data-cat="ecommerce">E-Commerce</button>
-					<button type="button" class="cat-pill" data-cat="qa">Developer QA</button>
-					<button type="button" class="cat-pill" data-cat="leads">Lead Gen</button>
-					<button type="button" class="cat-pill" data-cat="extraction">Data Extraction</button>
-					<button type="button" class="cat-pill" data-cat="automation">Workflow</button>
-				</div>
-				<div class="search-wrap">
-					<input type="text" id="library-search-input" class="search-input" placeholder="Search 24 examples by title, goal, or tags...">
-				</div>
-			</div>
-
-			<div id="examples-grid-container" class="examples-grid">
-				<!-- Dynamically populated by assets/js/app.js from assets/js/examples.js -->
-			</div>
-		</section>
-
-		<!-- 4. Solana Web3 Gate Section -->
-		<section id="solana-gate" class="section-container">
-			<div class="section-header">
-				<div class="section-subtitle">Web3 On-Chain Activation</div>
-				<h2 class="section-title">Solana Activation Gate ($88+ USD)</h2>
-				<p class="section-lead">
-					Simulated Demo Mode is 100% free with zero keys. To unlock <strong>Live Browser Mode</strong> with a real local Chromium browser, Tabvento verifies a contribution on the Solana Mainnet.
-				</p>
-			</div>
-
-			<div class="gate-grid">
-				<div class="gate-info-card">
-					<div class="gate-badge-row">
-						<img src="assets/img/solana-badge.svg" alt="Solana Gate" width="120" height="28">
-						<span class="gate-rule">Minimum $88 USD · No Maximum Limit</span>
-					</div>
-					<h3 class="gate-title">How On-Chain Activation Works</h3>
-					<ul class="gate-steps-list">
-						<li>
-							<div class="step-num">1</div>
-							<div class="step-desc">
-								<strong>Send Contribution:</strong> Transfer ≥ $88 USD (in native SOL or USDC) to the official Tabvento wallet on Solana Mainnet.
-							</div>
-						</li>
-						<li>
-							<div class="step-num">2</div>
-							<div class="step-desc">
-								<strong>Paste Signature:</strong> Copy your Base58 transaction hash from Phantom, Solflare, or SolanaFM and submit it below.
-							</div>
-						</li>
-						<li>
-							<div class="step-num">3</div>
-							<div class="step-desc">
-								<strong>Instant RPC Verification:</strong> Tabvento queries confirmed on-chain transactions and unlocks permanent local Live Mode in SQLite.
-							</div>
-						</li>
-					</ul>
-
-					<div class="wallet-box">
-						<div class="wallet-label">Official Solana Wallet Address:</div>
-						<div class="wallet-value-row">
-							<code id="solana-wallet-address" class="wallet-code">3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm</code>
-							<button type="button" id="btn-copy-solana-wallet" class="btn btn-secondary btn-sm">Copy</button>
-						</div>
-					</div>
-
-					<div class="gate-action-row">
-						<a href="solana:3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm?amount=88&spl-token=EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v" id="btn-open-solana-pay" class="btn btn-solana">
-							Open in Solana Pay ↗
-						</a>
-						<span class="text-muted text-sm">Accepts SOL and USDC on Solana Mainnet</span>
-					</div>
-				</div>
-
-				<div class="gate-verifier-card">
-					<h3 class="verifier-title">Interactive Signature Verifier</h3>
-					<p class="verifier-desc">
-						Test the on-chain signature verification simulation or check your actual transaction status.
-					</p>
-
-					<div class="form-group">
-						<label for="solana-sig-input" class="form-label">Solana Transaction Signature (Base58):</label>
-						<input type="text" id="solana-sig-input" class="form-input" placeholder="e.g. 5KnbGgY8m6b3d... (64-88 Base58 chars)">
-					</div>
-
-					<div class="verifier-actions">
-						<button type="button" id="btn-verify-sig" class="btn btn-primary">Verify On-Chain Transaction</button>
-						<button type="button" id="btn-use-demo-sig" class="btn btn-secondary">Fill Valid Demo Signature</button>
-					</div>
-
-					<div id="gate-verifier-status-box" class="gate-status-box">
-						<div class="status-row">
-							<span class="status-key">Live Mode Status:</span>
-							<span class="status-val text-warning">LOCKED (Demo Mode Active)</span>
-						</div>
-						<div class="status-row">
-							<span class="status-key">Minimum Required:</span>
-							<span class="status-val">$88.00 USD</span>
-						</div>
-						<div class="status-row">
-							<span class="status-key">Target Wallet:</span>
-							<span class="status-val">3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm</span>
-						</div>
-					</div>
-
-					<div style="margin-top: 1rem; text-align: right;">
-						<button type="button" id="btn-relock-gate" class="btn btn-secondary btn-xs" style="display:none;">Re-lock Gate</button>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<!-- 5. Provider Configuration Section -->
-		<section id="providers" class="section-container">
-			<div class="section-header">
-				<div class="section-subtitle">Model Flexibility</div>
-				<h2 class="section-title">Direct AI Model Provider Integration</h2>
-				<p class="section-lead">
-					Tabvento connects directly to your preferred AI model provider. API keys stay in your local <code>.env</code> file, never exposed to browser frontends or external servers.
-				</p>
-			</div>
-
-			<div class="providers-grid">
-				<div class="provider-card">
-					<div class="provider-icon">⚡</div>
-					<h3 class="provider-name">OpenAI</h3>
-					<div class="provider-models">gpt-4o · gpt-4o-mini · o1 · o3-mini</div>
-					<p class="provider-desc">Industry-standard reasoning and vision for complex multi-step browser interactions.</p>
-					<code class="provider-env">OPENAI_API_KEY=sk-...</code>
-				</div>
-				<div class="provider-card">
-					<div class="provider-icon">🧠</div>
-					<h3 class="provider-name">Anthropic Claude</h3>
-					<div class="provider-models">claude-3-7-sonnet · claude-3-5-haiku</div>
-					<p class="provider-desc">Exceptional coding, document parsing, and agentic tool use for long web sessions.</p>
-					<code class="provider-env">ANTHROPIC_API_KEY=sk-ant-...</code>
-				</div>
-				<div class="provider-card">
-					<div class="provider-icon">🌐</div>
-					<h3 class="provider-name">Google Gemini</h3>
-					<div class="provider-models">gemini-2.0-flash · gemini-1.5-pro</div>
-					<p class="provider-desc">Blazing speed and expansive context windows for high-throughput browser tasks.</p>
-					<code class="provider-env">GOOGLE_API_KEY=AIzaSy...</code>
-				</div>
-				<div class="provider-card">
-					<div class="provider-icon">🦙</div>
-					<h3 class="provider-name">Local Ollama</h3>
-					<div class="provider-models">llama3.2 · qwen2.5 · mistral · deepseek-r1</div>
-					<p class="provider-desc">100% private, zero external API costs. Runs locally via loopback endpoint.</p>
-					<code class="provider-env">http://127.0.0.1:11434/v1</code>
-				</div>
-				<div class="provider-card">
-					<div class="provider-icon">🔌</div>
-					<h3 class="provider-name">OpenAI-Compatible</h3>
-					<div class="provider-models">vLLM · Together · Groq · DeepSeek · OpenRouter</div>
-					<p class="provider-desc">Universal adapter for custom self-hosted inference servers and third-party gateways.</p>
-					<code class="provider-env">TABVENTO_COMPATIBLE_API_KEY=...</code>
-				</div>
-			</div>
-		</section>
-
-		<!-- 6. Architecture & System Tour Section -->
-		<section id="architecture" class="section-container">
-			<div class="section-header">
-				<div class="section-subtitle">System Design</div>
-				<h2 class="section-title">Local-First Architecture & Privacy Boundaries</h2>
-				<p class="section-lead">
-					Built with zero cloud dependencies, strict loopback HTTP security, and thread-isolated SQLite storage.
-				</p>
-			</div>
-
-			<div class="arch-layout">
-				<div class="arch-diagram-card">
-					<div class="arch-flow">
-						<div class="flow-node">
-							<div class="node-badge">FRONTEND</div>
-							<div class="node-title">Bilingual Dashboard (EN/ES)</div>
-							<div class="node-sub">Vanilla JS, CSS Grid, Zero CDN</div>
-						</div>
-						<div class="flow-arrow">⬇ HTTP Loopback (127.0.0.1:8765)</div>
-						<div class="flow-node">
-							<div class="node-badge">API SERVER</div>
-							<div class="node-title">Local Python HTTP & Security Gate</div>
-							<div class="node-sub">Origin, Sec-Fetch, Host, CSP hardening</div>
-						</div>
-						<div class="flow-arrow">⬇ Local Dispatch</div>
-						<div class="flow-split">
-							<div class="flow-node split-node">
-								<div class="node-badge">FREE MODE</div>
-								<div class="node-title">Simulated Demo Runner</div>
-								<div class="node-sub">Synthetic sandbox, 0 cost</div>
-							</div>
-							<div class="flow-node split-node">
-								<div class="node-badge">SOLANA GATE</div>
-								<div class="node-title">Web3 On-Chain Gate</div>
-								<div class="node-sub">≥ $88 USD on Solana Mainnet</div>
-							</div>
-						</div>
-						<div class="flow-arrow">⬇ Execution Engine</div>
-						<div class="flow-node">
-							<div class="node-badge">AUTOMATION ENGINE</div>
-							<div class="node-title">Browser Automation & LLM Adapter</div>
-							<div class="node-sub">Local Chromium control via CDP</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="arch-inspector-card">
-					<h3 class="inspector-title">Security & Execution Boundaries</h3>
-					<div id="arch-inspector-box" class="arch-info-content">
-						<div class="security-bullet">
-							<strong>🔒 Loopback Isolation:</strong> The dashboard binds exclusively to <code>127.0.0.1</code> and rejects non-loopback Host headers to thwart DNS rebinding.
-						</div>
-						<div class="security-bullet">
-							<strong>🛡️ Key Zero-Exposure:</strong> LLM keys remain strictly in local environment variables (<code>.env</code>) and are never stored in SQLite or passed to browser DOM.
-						</div>
-						<div class="security-bullet">
-							<strong>💾 Local SQLite Storage:</strong> All mission transcripts, task steps, and configuration states persist in an unencrypted local SQLite database on your machine.
-						</div>
-						<div class="security-bullet">
-							<strong>⚡ Zero Docker Footprint:</strong> Runs directly with native Python 3.11+ and <code>uv</code>. No Docker daemons, background containers, or cloud subscriptions required.
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	</main>
-
-	<!-- Footer Section -->
-	<footer id="footer" class="site-footer">
-		<div class="footer-inner">
-			<div class="footer-brand">
-				<img src="assets/img/mark.svg" alt="Tabvento Mark" width="28" height="28">
-				<span class="footer-title">Tabvento</span>
-				<span class="footer-copy">Autonomous AI Browser Automation Dashboard</span>
-			</div>
-			<div class="footer-links">
-				<a href="https://github.com/annoris/tabvento" target="_blank" rel="noopener noreferrer">GitHub Repository</a>
-				<a href="https://github.com/annoris/tabvento/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">MIT License</a>
-				<a href="https://github.com/annoris/tabvento/blob/main/.github/SECURITY.md" target="_blank" rel="noopener noreferrer">Security Policy</a>
-				<a href="https://github.com/annoris/tabvento/blob/main/.github/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing</a>
-			</div>
-			<div class="footer-bottom">
-				<p>Copyright &copy; 2026 Tabvento. Distributed under open-source and commercial licensing terms.</p>
-				<p class="footer-solana">Official Solana Verification Wallet: <code>3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm</code></p>
-			</div>
+				</section>
+				<footer>
+					<span
+						>tabvento<span class="brand-dot">.</span>
+						<span class="footer-tag" data-i18n="footer.tag"
+							>UN POCO DE AIRE. MUCHAS POSIBILIDADES.</span
+						></span
+					><a href="#guia" data-i18n="footer.link"
+						>Tabvento 0.1.0 · Guía y créditos ↗</a
+					>
+				</footer>
+			</main>
 		</div>
-	</footer>
-
-	<!-- Global Toast Notifications -->
-	<div id="toast-container" class="toast-container" aria-live="polite"></div>
-
-	<!-- Scripts -->
-	<script src="assets/js/examples.js"></script>
-	<script src="assets/js/simulator.js"></script>
-	<script src="assets/js/app.js"></script>
-</body>
+		<dialog id="mission-dialog" aria-labelledby="detail-title">
+			<div class="detail-top">
+				<span class="eyebrow" id="detail-mode" data-i18n="detail.modeDefault"
+					>MISIÓN</span
+				><button
+					class="icon-button"
+					id="close-detail"
+					aria-label="Cerrar detalles"
+					data-i18n-aria-label="detail.closeAria"
+				>
+					<span data-icon="close"></span>
+				</button>
+			</div>
+			<h2 id="detail-title"></h2>
+			<div id="detail-meta"></div>
+			<div id="detail-steps" class="timeline"></div>
+			<div id="detail-result" class="result-box" hidden></div>
+			<div class="detail-actions">
+				<button
+					class="button secondary"
+					id="copy-result"
+					data-i18n="detail.copy"
+				>
+					Copiar resultado</button
+				><button
+					class="button secondary"
+					id="download-result"
+					data-i18n="detail.download"
+				>
+					Descargar</button
+				><button
+					class="button danger"
+					id="cancel-mission"
+					data-i18n="detail.cancel"
+				>
+					Cancelar misión</button
+				><button
+					class="button danger"
+					id="delete-mission"
+					data-i18n="detail.delete"
+				>
+					Eliminar del historial
+				</button>
+			</div>
+		</dialog>
+		<div id="toast" role="status" aria-live="polite"></div>
+		<script src="./i18n.js" defer></script>
+		<script src="./app.js" defer></script>
+	</body>
 </html>

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /**
- * Tabvento Showcase & GitHub Pages Validator
+ * Tabvento Authentic Web Application & GitHub Pages Validator
  * Zero external npm dependencies (Node ESM built-ins only)
  *
  * Verifies:
  * 1. site/.nojekyll exists
- * 2. site/index.html exists and is well-formed
- * 3. Required sections present: hero, simulator, 24-mission examples, Solana gate, provider configuration, architecture, footer
- * 4. All referenced CSS, JS, font, and image assets exist and are non-empty
+ * 2. site/index.html and core authentic Tabvento files exist and are well-formed
+ * 3. Required sections present: hero, overview, missions composer, 24-mission examples, Solana gate, provider configuration, guide, footer
+ * 4. All referenced CSS, JS, font, and SVG assets exist and are non-empty
  * 5. No localhost, 127.0.0.1, or file:// links exist in href/src
  * 6. All 24 mission examples are present in data / DOM
  */
@@ -37,9 +37,9 @@ function fail(name, detail = '') {
 	console.error(`  ${message}`);
 }
 
-console.log('--- Tabvento GitHub Pages & Repository Validator ---');
+console.log('--- Tabvento GitHub Pages & Authentic Web Application Validator ---');
 console.log(`Project root: ${rootDir}`);
-console.log(`Showcase dir: ${siteDir}\n`);
+console.log(`Site dir:     ${siteDir}\n`);
 
 // 1. Verify site/.nojekyll exists
 console.log('1. Checking GitHub Pages configuration...');
@@ -49,54 +49,75 @@ if (fs.existsSync(nojekyllPath)) {
 	fail('.nojekyll missing', `Expected at ${nojekyllPath}`);
 }
 
-// 2. Verify site/index.html exists and read contents
-console.log('\n2. Checking site/index.html existence & structure...');
+// 2. Verify site/index.html and authentic Tabvento web files exist
+console.log('\n2. Checking site/ authentic Tabvento files existence & integrity...');
+const expectedFiles = [
+	{ rel: 'index.html', label: 'HTML Entry Point' },
+	{ rel: 'styles.css', label: 'Tabvento Main Stylesheet' },
+	{ rel: 'fonts.css', label: 'Fonts Stylesheet' },
+	{ rel: 'app.js', label: 'Client Application & Simulator' },
+	{ rel: 'i18n.js', label: 'Bilingual i18n Translations' },
+	{ rel: 'mark.svg', label: 'Tabvento Mark SVG' },
+];
+
+for (const f of expectedFiles) {
+	const filePath = path.resolve(siteDir, f.rel);
+	if (!fs.existsSync(filePath)) {
+		fail(`Missing file: ${f.rel}`, `Expected at ${filePath}`);
+	} else {
+		const stat = fs.statSync(filePath);
+		if (stat.size === 0) {
+			fail(`Empty file: ${f.rel}`);
+		} else {
+			pass(`${f.label} (${f.rel}) exists and non-empty`, `${stat.size} bytes`);
+		}
+	}
+}
+
 if (!fs.existsSync(indexPath)) {
-	fail('site/index.html missing', `File not found at ${indexPath}`);
-	console.error(`\nValidation aborted: ${errors.length} fatal error(s).`);
+	console.error(`\nValidation aborted: index.html missing.`);
 	process.exit(1);
 }
 
 const htmlContent = fs.readFileSync(indexPath, 'utf-8');
-if (htmlContent.trim().length === 0) {
-	fail('site/index.html is empty');
-	process.exit(1);
-} else {
-	pass('site/index.html exists and is non-empty', `${htmlContent.length} bytes`);
-}
 
-// 3. Verify required sections
-console.log('\n3. Verifying required showcase sections...');
+// 3. Verify required Tabvento sections and components
+console.log('\n3. Verifying authentic Tabvento views & components...');
 const requiredSections = [
 	{
 		id: 'hero',
 		label: 'Hero section',
-		test: (html) => /(?:id=["']hero["']|class=["'][^"']*hero[^"']*["']|<section[^>]*hero)/i.test(html),
+		test: (html) => /(?:class=["'][^"']*hero[^"']*["']|<section[^>]*hero|id=["']hero)/i.test(html),
 	},
 	{
-		id: 'simulator',
-		label: 'Interactive Simulator section',
-		test: (html) => /(?:id=["']simulator["']|class=["'][^"']*simulator[^"']*["']|interactive simulator|browser simulation)/i.test(html),
+		id: 'overview',
+		label: 'Overview view (#inicio)',
+		test: (html) => /(?:data-view=["']inicio["']|href=["']#inicio["'])/i.test(html),
+	},
+	{
+		id: 'missions',
+		label: 'Missions view & composer (#misiones)',
+		test: (html) => /(?:data-view=["']misiones["']|id=["']mission-form["']|id=["']task-input["'])/i.test(html),
 	},
 	{
 		id: 'examples',
-		label: '24 Mission Examples section',
-		test: (html) => /(?:id=["']examples["']|class=["'][^"']*example[^"']*["']|24 (?:example|misiones|misión|mission))/i.test(html),
+		label: '24 Mission Examples library (#example-library)',
+		test: (html) => /(?:id=["']example-library["']|id=["']example-grid["']|24 example missions|24 misiones de ejemplo)/i.test(html),
 	},
 	{
 		id: 'solana-gate',
-		label: 'Solana Gate section ($88 USD minimum, 3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm)',
-		test: (html) => /(?:3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm|solana-gate|solana-card|id=["']solana)/i.test(html),
+		label: 'Solana Gate ($88 USD minimum, 3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm)',
+		test: (html) => /(?:3HvUMCUSSHEdtA35UuD4J7mbgpTxJ7LgT2X7GfdzvBdm|solana-wallet-address|solana-verify-button)/i.test(html),
 	},
 	{
 		id: 'providers',
-		label: 'Provider Configuration section',
-		test: (html) => /(?:id=["']providers["']|provider-config|settings-card|provider configuration|configuración de proveedores)/i.test(html),
+		label: 'Provider Configuration section (#provider-select)',
+		test: (html) => /(?:id=["']provider-select["']|id=["']model-input["']|id=["']save-connection["'])/i.test(html),
 	},
 	{
-		id: 'architecture',
-		label: 'Architecture section',
-		test: (html) => /(?:id=["']architecture["']|class=["'][^"']*architecture[^"']*["']|<h[1-6][^>]*>[^<]*Architecture|Arquitectura)/i.test(html),
+		id: 'guide',
+		label: 'Guide view (#guia)',
+		test: (html) => /(?:data-view=["']guia["']|href=["']#guia["'])/i.test(html),
 	},
 	{
 		id: 'footer',
@@ -107,9 +128,9 @@ const requiredSections = [
 
 for (const section of requiredSections) {
 	if (section.test(htmlContent)) {
-		pass(`Section: ${section.label}`);
+		pass(`Section / Component: ${section.label}`);
 	} else {
-		fail(`Section missing: ${section.label}`, `Could not find section marker for '${section.id}'`);
+		fail(`Component missing: ${section.label}`, `Could not find marker for '${section.id}'`);
 	}
 }
 
@@ -135,8 +156,8 @@ if (forbiddenLinks.length === 0) {
 	fail('Found forbidden localhost / file:// links', forbiddenLinks.join(', '));
 }
 
-// 5. Verify all referenced CSS, JS, fonts, and image assets exist and are non-empty
-console.log('\n5. Verifying referenced assets exist and are non-empty...');
+// 5. Verify all referenced CSS, JS, fonts, and SVG assets exist and are non-empty
+console.log('\n5. Verifying referenced assets and font integrity...');
 const assetRegex = /(?:href|src)=["']([^"']+)["']/gi;
 const referencedAssets = new Set();
 
@@ -151,11 +172,9 @@ while ((match = assetRegex.exec(htmlContent)) !== null) {
 
 let assetsChecked = 0;
 for (const relAsset of referencedAssets) {
-	// Strip query parameters or hashes
 	const cleanRel = relAsset.split('?')[0].split('#')[0];
 	if (!cleanRel) continue;
 
-	// Resolve against siteDir
 	let resolvedPath;
 	if (cleanRel.startsWith('/')) {
 		resolvedPath = path.join(siteDir, cleanRel.slice(1));
@@ -164,7 +183,7 @@ for (const relAsset of referencedAssets) {
 	}
 
 	if (!fs.existsSync(resolvedPath)) {
-		fail(`Referenced asset does not exist: ${relAsset}`, `Resolved to: ${resolvedPath}`);
+		fail(`Referenced HTML asset does not exist: ${relAsset}`, `Resolved to: ${resolvedPath}`);
 	} else {
 		const stat = fs.statSync(resolvedPath);
 		if (stat.size === 0) {
@@ -181,49 +200,84 @@ if (assetsChecked > 0) {
 	fail('No local assets were found referenced in site/index.html');
 }
 
-// Also scan all CSS files in site/assets/css for url(...) references
-const cssDir = path.resolve(siteDir, 'assets', 'css');
-if (fs.existsSync(cssDir)) {
-	const cssFiles = fs.readdirSync(cssDir).filter(f => f.endsWith('.css'));
-	let cssAssetsChecked = 0;
-	for (const cssFile of cssFiles) {
-		const cssPath = path.join(cssDir, cssFile);
-		const cssContent = fs.readFileSync(cssPath, 'utf-8');
-		const urlRegex = /url\(\s*['"]?([^'")]+)['"]?\s*\)/g;
-		let urlMatch;
-		while ((urlMatch = urlRegex.exec(cssContent)) !== null) {
-			const cssTarget = urlMatch[1].trim();
-			if (/^(?:https?:\/\/|\/\/|data:)/i.test(cssTarget)) continue;
-			const cleanTarget = cssTarget.split('?')[0].split('#')[0];
-			const resolvedTarget = path.resolve(path.dirname(cssPath), cleanTarget);
-			if (!fs.existsSync(resolvedTarget)) {
-				fail(`CSS url() reference not found: ${cssTarget} in ${cssFile}`, resolvedTarget);
+// Scan all CSS files in siteDir for @import and url(...) references
+function findCssFiles(dir) {
+	let results = [];
+	const entries = fs.readdirSync(dir, { withFileTypes: true });
+	for (const entry of entries) {
+		const full = path.join(dir, entry.name);
+		if (entry.isDirectory()) {
+			results = results.concat(findCssFiles(full));
+		} else if (entry.name.endsWith('.css')) {
+			results.push(full);
+		}
+	}
+	return results;
+}
+
+const cssFiles = findCssFiles(siteDir);
+let cssAssetsChecked = 0;
+for (const cssPath of cssFiles) {
+	const cssContent = fs.readFileSync(cssPath, 'utf-8');
+	const urlRegex = /(?:@import\s+)?url\(\s*['"]?([^'")]+)['"]?\s*\)/g;
+	let urlMatch;
+	while ((urlMatch = urlRegex.exec(cssContent)) !== null) {
+		const cssTarget = urlMatch[1].trim();
+		if (/^(?:https?:\/\/|\/\/|data:)/i.test(cssTarget)) continue;
+		const cleanTarget = cssTarget.split('?')[0].split('#')[0];
+		let resolvedTarget;
+		if (cleanTarget.startsWith('/')) {
+			resolvedTarget = path.join(siteDir, cleanTarget.slice(1));
+		} else {
+			resolvedTarget = path.resolve(path.dirname(cssPath), cleanTarget);
+		}
+
+		if (!fs.existsSync(resolvedTarget)) {
+			fail(`CSS url() reference not found: ${cssTarget} in ${path.relative(siteDir, cssPath)}`, resolvedTarget);
+		} else {
+			const stat = fs.statSync(resolvedTarget);
+			if (stat.size === 0) {
+				fail(`CSS url() referenced asset is 0 bytes: ${cssTarget} in ${path.relative(siteDir, cssPath)}`);
 			} else {
-				const stat = fs.statSync(resolvedTarget);
-				if (stat.size === 0) {
-					fail(`CSS url() referenced asset is 0 bytes: ${cssTarget} in ${cssFile}`);
-				} else {
-					cssAssetsChecked++;
-				}
+				cssAssetsChecked++;
 			}
 		}
 	}
-	if (cssAssetsChecked > 0) {
-		pass(`All ${cssAssetsChecked} CSS url(...) referenced assets exist and are non-empty`);
-	}
 }
 
-// 6. Verify all 24 mission examples are present in data
-console.log('\n6. Verifying all 24 mission examples in data...');
+if (cssAssetsChecked > 0) {
+	pass(`All ${cssAssetsChecked} CSS url(...) and @import referenced assets exist and are non-empty`);
+}
 
-// Check whether 24 examples are represented
-// Examples could be represented by numbered keys (e.g. 01..24, examples.01..24), data attributes, or an embedded JSON array.
-// Look in index.html and any referenced JS files
+// Verify bundled font files
+const fontsDir = path.resolve(siteDir, 'fonts');
+const expectedFonts = [
+	'dm-sans-400.ttf', 'dm-sans-500.ttf', 'dm-sans-600.ttf', 'dm-sans-700.ttf',
+	'space-grotesk-400.ttf', 'space-grotesk-500.ttf', 'space-grotesk-600.ttf', 'space-grotesk-700.ttf'
+];
+let fontsFound = 0;
+for (const font of expectedFonts) {
+	const fp = path.join(fontsDir, font);
+	if (fs.existsSync(fp) && fs.statSync(fp).size > 0) {
+		fontsFound++;
+	} else {
+		fail(`Font missing or empty: fonts/${font}`);
+	}
+}
+if (fontsFound === expectedFonts.length) {
+	pass(`All ${expectedFonts.length} bundled DM Sans & Space Grotesk fonts verified`);
+}
+
+// 6. Verify all 24 mission examples are present in data / DOM
+console.log('\n6. Verifying all 24 mission examples in data / translations...');
 let combinedSources = htmlContent;
 const jsRegex = /<script[^>]*src=["']([^"']+\.js)["']/gi;
 let jsMatch;
 while ((jsMatch = jsRegex.exec(htmlContent)) !== null) {
-	const scriptPath = path.resolve(siteDir, jsMatch[1].split('?')[0]);
+	const cleanScript = jsMatch[1].split('?')[0];
+	const scriptPath = cleanScript.startsWith('/')
+		? path.join(siteDir, cleanScript.slice(1))
+		: path.resolve(siteDir, cleanScript);
 	if (fs.existsSync(scriptPath)) {
 		combinedSources += '\n' + fs.readFileSync(scriptPath, 'utf-8');
 	}
@@ -234,7 +288,6 @@ let missingExampleIndices = [];
 
 for (let i = 1; i <= 24; i++) {
 	const padded = String(i).padStart(2, '0');
-	// Check for various patterns: "examples.01", "example-01", "examples-01", id="example-1", data-example="1", "id": 1 or "id": "01"
 	const patterns = [
 		new RegExp(`examples\\.${padded}`, 'i'),
 		new RegExp(`example[-_]${padded}`, 'i'),
@@ -256,24 +309,16 @@ for (let i = 1; i <= 24; i++) {
 if (foundExamplesCount === 24) {
 	pass(`All 24 mission examples confirmed present in data/DOM (01 through 24)`);
 } else {
-	// Alternatively check if there is an array or list of at least 24 mission items
-	const missionMatches = combinedSources.match(/class=["'][^"']*example-card[^"']*["']/g) ||
-	                       combinedSources.match(/data-example-id/g) ||
-	                       combinedSources.match(/"id"\s*:\s*\d+/g);
-	if (missionMatches && missionMatches.length >= 24) {
-		pass(`Confirmed ${missionMatches.length} mission example elements in data/DOM`);
-	} else {
-		fail(
-			`Only ${foundExamplesCount}/24 numbered mission examples verified`,
-			missingExampleIndices.length > 0 ? `Missing: ${missingExampleIndices.join(', ')}` : ''
-		);
-	}
+	fail(
+		`Only ${foundExamplesCount}/24 numbered mission examples verified`,
+		missingExampleIndices.length > 0 ? `Missing: ${missingExampleIndices.join(', ')}` : ''
+	);
 }
 
 // 7. Overall Summary
 console.log('\n=================================================');
 if (errors.length === 0) {
-	console.log(`✔ ALL CHECKS PASSED (${passedChecks} checks succeeded). Repository & Showcase ready for GitHub Pages!`);
+	console.log(`✔ ALL CHECKS PASSED (${passedChecks} checks succeeded). Authentic Tabvento ready for GitHub Pages!`);
 	console.log('=================================================\n');
 	process.exit(0);
 } else {
