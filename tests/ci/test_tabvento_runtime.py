@@ -35,7 +35,7 @@ def test_saved_connection_executes_a_mission_in_local_chrome(chrome_binary, tmp_
 		return ModelResponse(parts=[ToolCallPart('finish_from_repl', {'success': True, 'expression': 'title'})])
 
 	model = FunctionModel(scripted)
-	monkeypatch.setattr('tabvento.runner.build_model', lambda config: model)
+	monkeypatch.setattr('tabvento.runner.build_model', lambda config, **_kwargs: model)
 	server = TabventoServer(('127.0.0.1', 0), tmp_path)
 	server.store.set_setting(
 		'contribution',
