@@ -155,6 +155,6 @@ dev = [
     "pytest-timeout==2.4.0",
     "pre-commit==4.5.1",
     "codespell==2.4.1",
-    "pyright==1.1.408",
+    "pyright==1.1.414",
     "pyyaml==6.0.3",  # tests/ci/test_workflows.py reads the workflow files
 ]
