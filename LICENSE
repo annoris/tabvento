@@ -1,0 +1,75 @@
+Tabvento Proprietary License — All Rights Reserved
+Identifier: LicenseRef-Tabvento-Proprietary
+Version: 2.0 (2026-11-24)
+
+Copyright (c) 2026 Tabvento (https://github.com/annoris/tabvento)
+All Rights Reserved.
+
+Licensor: Annoris Fernandez, operating the Tabvento project, Florida, USA.
+"Tabvento" in these terms refers to that project and its licensor, not to a
+separately identified corporation.
+
+1. Proprietary Ownership & Scope
+
+All proprietary materials contained in this public showcase repository—including
+without limitation the Tabvento brand, trademarks, visual design, UI/UX assets,
+interactive showcase, screenshots, media, and documentation ("Tabvento Materials")—
+are the exclusive intellectual property of Tabvento. All rights not expressly
+granted herein are reserved.
+
+This repository is published strictly as a public showcase and documentation portal.
+No source code license or open-source grant is provided for Tabvento Materials.
+
+2. Permitted Viewing Only
+
+You are granted a limited, non-exclusive, non-transferable, revocable permission
+solely to:
+  (a) View and interact with the public live showcase hosted on GitHub Pages
+      (https://annoris.github.io/tabvento/); and
+  (b) Read the public documentation, screenshots, and release notes in this
+      repository for personal or internal evaluation purposes.
+
+3. Prohibited Uses
+
+Without prior express written authorization from Tabvento, you may NOT:
+  (a) Copy, reproduce, modify, adapt, translate, or create derivative works from
+      the Tabvento Materials;
+  (b) Redistribute, publish, sublicense, sell, rent, lease, or otherwise exploit
+      the Tabvento Materials for any commercial or non-commercial purpose;
+  (c) Perform automated scraping, bulk extraction, mirroring, or systematic
+      harvesting of the showcase, documentation, or media assets; or
+  (d) Reverse engineer, decompile, disassemble, or attempt to derive proprietary
+      logic, workflows, or underlying source code from the showcase or related
+      Tabvento software.
+
+4. Third-Party Notices & Preserved Rights
+
+Third-party components, upstream references, and bundled font assets (such as
+DM Sans and Space Grotesk under the SIL Open Font License 1.1, and upstream
+MIT-licensed components) remain governed by their respective third-party licenses.
+See THIRD_PARTY_NOTICES.md and the corresponding license files in site/fonts/
+for full attributions and license terms. Nothing in this license restricts
+independent rights granted by those third-party licenses or applicable law.
+
+5. Official Commercial Licensing & Live Activation
+
+Commercial licensing, enterprise deployments, or activation of Tabvento's Live
+Browser Mode require separate authorization or verified activation as described
+in the official Tabvento documentation.
+
+6. Disclaimer of Warranty & Limitation of Liability
+
+TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THE TABVENTO MATERIALS AND
+PUBLIC SHOWCASE ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR
+A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL TABVENTO BE LIABLE
+FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM OR IN CONNECTION WITH
+THE USE OF OR INABILITY TO USE THESE MATERIALS.
+
+7. Governing Law
+
+This license is governed by the laws of the State of Florida and applicable
+United States federal law, without regard to conflict-of-law principles.
+
+For licensing inquiries or written authorization, contact the Licensor via the
+official repository at https://github.com/annoris/tabvento.
